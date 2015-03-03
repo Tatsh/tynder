@@ -21,5 +21,7 @@
 + (id)tinderSettingsHeaderTitleFont;
 + (id)tinderSettingsHeaderValueFont;
 + (id)tinderSettingsNavBarEditFont;
++ (id)tinderUnmatchDialogHeaderDetailTextFont;
++ (id)tinderUnmatchDialogHeaderTitleTextFont;
 @end
 

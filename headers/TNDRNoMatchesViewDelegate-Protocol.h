@@ -8,6 +8,5 @@
 
 @protocol TNDRNoMatchesViewDelegate <NSObject>
 - (void)didTapDiscoverButton;
-- (void)didTapMatchFriendsButton;
 @end
 

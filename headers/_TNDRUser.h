@@ -84,6 +84,7 @@
 @property(retain, nonatomic) NSString *travelLocationName; // @dynamic travelLocationName;
 @property(retain, nonatomic) NSString *userID; // @dynamic userID;
 @property(retain, nonatomic) NSString *userLocationName; // @dynamic userLocationName;
+@property(retain, nonatomic) NSString *userLocationProximity; // @dynamic userLocationProximity;
 
 @end
 

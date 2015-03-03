@@ -7,8 +7,6 @@
 #import "UIView.h"
 
 @interface UIView (tinderSnapshot)
-+ (BOOL)deviceSupportsScreenshots;
-+ (BOOL)isLessThaniPhone6;
 - (id)imageViewWithView;
 - (id)snapshotFromView;
 - (id)snapshotFromViewAfterScreenUpdate:(BOOL)arg1;

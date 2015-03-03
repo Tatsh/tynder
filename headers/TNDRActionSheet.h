@@ -29,7 +29,7 @@
 - (void).cxx_destruct;
 - (void)_showWithAnimation:(BOOL)arg1;
 @property(nonatomic) __weak id actionSheetDelegate; // @synthesize actionSheetDelegate=_actionSheetDelegate;
-- (void)addButtonWithTitle:(id)arg1 buttonId:(int)arg2 font:(id)arg3 textColor:(id)arg4 textHighlightColor:(id)arg5 textShadowColor:(id)arg6 backgroundColor:(id)arg7 backgroundHightlightColor:(id)arg8 increasedSpacing:(BOOL)arg9 group:(int)arg10;
+- (void)addButtonWithTitle:(id)arg1 buttonId:(int)arg2 font:(id)arg3 textColor:(id)arg4 textHighlightColor:(id)arg5 textShadowColor:(id)arg6 backgroundColor:(id)arg7 backgroundHightlightColor:(id)arg8 buttonImage:(id)arg9 increasedSpacing:(BOOL)arg10 group:(int)arg11;
 - (void)addTitle:(id)arg1 buttonId:(int)arg2 font:(id)arg3 textColor:(id)arg4 backgroundColor:(id)arg5 group:(int)arg6;
 - (void)animateGroupIn:(int)arg1;
 - (void)animateInBackground;

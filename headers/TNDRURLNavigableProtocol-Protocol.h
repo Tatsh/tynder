@@ -12,8 +12,7 @@
 + (NSString *)viewControllerNavigationKey;
 
 @optional
-- (void)didNavigateTo:(NSString *)arg1;
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 - (void)transitionTo:(NSString *)arg1 optionsDict:(NSDictionary *)arg2 animated:(BOOL)arg3 completion:(void (^)(void))arg4;
-- (void)willNavigateTo:(NSString *)arg1;
 @end
 

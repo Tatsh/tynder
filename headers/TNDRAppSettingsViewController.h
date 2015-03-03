@@ -7,12 +7,11 @@
 #import "UITableViewController.h"
 
 #import "TNDRActionSheetDelegate.h"
-#import "TNDRFriendsChangeMyIDViewControllerDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
 
-@class NSArray, NSString, TNDRActionSheet, TNDRAppSettingsLogoView, TNDRAppSettingsTableViewCell, TNDRDescriptionFooterView, TNDRFriendsChangeMyIDViewController, TNDRSupportContacter, UISwitch;
+@class NSArray, NSString, TNDRActionSheet, TNDRAppSettingsLogoView, TNDRAppSettingsTableViewCell, TNDRDescriptionFooterView, TNDRSupportContacter, UISwitch;
 
-@interface TNDRAppSettingsViewController : UITableViewController <TNDRFriendsChangeMyIDViewControllerDelegate, TNDRActionSheetDelegate, TNDRURLNavigableProtocol>
+@interface TNDRAppSettingsViewController : UITableViewController <TNDRActionSheetDelegate, TNDRURLNavigableProtocol>
 {
     BOOL _loggingOut;
     id <TNDRAppSettingsViewControllerDelegate> _menuDelegate;
@@ -27,7 +26,6 @@
     TNDRSupportContacter *_contacter;
     TNDRActionSheet *_logoutActionSheet;
     TNDRActionSheet *_deleteActionSheet;
-    TNDRFriendsChangeMyIDViewController *_tinderIDViewController;
     NSArray *_sections;
 }
 
@@ -37,7 +35,6 @@
 @property(retain, nonatomic) TNDRSupportContacter *contacter; // @synthesize contacter=_contacter;
 - (void)deleteAccount:(id)arg1;
 @property(retain, nonatomic) TNDRActionSheet *deleteActionSheet; // @synthesize deleteActionSheet=_deleteActionSheet;
-- (void)didFinishChangingID;
 - (void)handleUserDidClearInformation:(id)arg1;
 - (id)init;
 - (void)logOut:(id)arg1;
@@ -60,7 +57,6 @@
 - (void)setNotificationSwitches;
 @property(retain, nonatomic) TNDRAppSettingsTableViewCell *tinderIDCell; // @synthesize tinderIDCell=_tinderIDCell;
 @property(retain, nonatomic) TNDRDescriptionFooterView *tinderIDDescriptionFooterView; // @synthesize tinderIDDescriptionFooterView=_tinderIDDescriptionFooterView;
-@property(retain, nonatomic) TNDRFriendsChangeMyIDViewController *tinderIDViewController; // @synthesize tinderIDViewController=_tinderIDViewController;
 - (void)showPrivacyPolicy;
 - (void)showTermsOfService;
 - (void)showURL:(id)arg1 title:(id)arg2;
@@ -70,7 +66,6 @@
 - (int)tableView:(id)arg1 numberOfRowsInSection:(int)arg2;
 - (id)tableView:(id)arg1 titleForHeaderInSection:(int)arg2;
 - (id)tableView:(id)arg1 viewForFooterInSection:(int)arg2;
-- (void)transitionTo:(id)arg1 optionsDict:(id)arg2 animated:(BOOL)arg3 completion:(CDUnknownBlockType)arg4;
 - (void)updateServerWithNewPushNotificationSettings;
 - (void)viewDidAppear:(BOOL)arg1;
 - (void)viewDidLoad;
@@ -78,6 +73,7 @@
 - (void)viewWillDisappear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

@@ -23,6 +23,7 @@
 - (id)init;
 - (id)initWithCoder:(id)arg1;
 - (id)initWithData:(id)arg1;
+- (id)initWithNationalNumberPattern:(id)arg1 withPossibleNumberPattern:(id)arg2 withExample:(id)arg3;
 - (BOOL)isEqual:(id)arg1;
 @property(retain, nonatomic) NSString *nationalNumberPattern; // @synthesize nationalNumberPattern=_nationalNumberPattern;
 @property(retain, nonatomic) NSString *possibleNumberPattern; // @synthesize possibleNumberPattern=_possibleNumberPattern;

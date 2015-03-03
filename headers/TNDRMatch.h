@@ -10,7 +10,7 @@
 {
 }
 
-- (void)block:(CDUnknownBlockType)arg1;
+- (void)blockWithReason:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)follow:(BOOL)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)reportWithReason:(id)arg1 andMessage:(id)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)sendMessage:(id)arg1 completion:(CDUnknownBlockType)arg2;

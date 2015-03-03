@@ -6,38 +6,57 @@
 
 #import "UIView.h"
 
-@class NSDictionary, UIButton;
+@class NSDictionary, NSLayoutConstraint, UIButton, UITextField;
 
 @interface TNDRDialogFooter : UIView
 {
+    BOOL _calculateContentSize;
     UIButton *_dontShowAgainButton;
     UIButton *_confirmationButton;
+    UIButton *_purchaseButton;
     UIButton *_optionButton;
     UIButton *_cancelButton;
+    UITextField *_textEntryField;
     unsigned int _options;
+    float _preferredContentWidth;
     UIView *_contentView;
     UIButton *_otherButton;
+    NSLayoutConstraint *_purchaseButtonHeight;
     NSDictionary *_buttons;
     UIView *_topSeparator;
+    UIView *_textEntryFieldLine;
 }
 
-+ (id)dialogFooterWithOptions:(unsigned int)arg1;
++ (id)footerOfWidth:(float)arg1 options:(unsigned int)arg2;
 - (void).cxx_destruct;
 - (void)_autolayoutSubviews;
 - (void)_removeSubviews;
 - (void)_setupSubviews;
+- (void)applyAnimationsToButton:(id)arg1;
 @property(retain, nonatomic) NSDictionary *buttons; // @synthesize buttons=_buttons;
+@property(nonatomic) BOOL calculateContentSize; // @synthesize calculateContentSize=_calculateContentSize;
 @property(retain, nonatomic) UIButton *cancelButton; // @synthesize cancelButton=_cancelButton;
 @property(retain, nonatomic) UIButton *confirmationButton; // @synthesize confirmationButton=_confirmationButton;
 @property(retain, nonatomic) UIView *contentView; // @synthesize contentView=_contentView;
 @property(retain, nonatomic) UIButton *dontShowAgainButton; // @synthesize dontShowAgainButton=_dontShowAgainButton;
 - (void)handleDontShowAgainButtonTap:(id)arg1;
 - (id)initWithFrame:(struct CGRect)arg1 options:(unsigned int)arg2;
+- (struct CGSize)intrinsicContentSize;
 @property(readonly, nonatomic) UIButton *optionButton; // @synthesize optionButton=_optionButton;
 @property(nonatomic) unsigned int options; // @synthesize options=_options;
 @property(retain, nonatomic) UIButton *otherButton; // @synthesize otherButton=_otherButton;
+@property(nonatomic) float preferredContentWidth; // @synthesize preferredContentWidth=_preferredContentWidth;
+@property(retain, nonatomic) UIButton *purchaseButton; // @synthesize purchaseButton=_purchaseButton;
+@property(retain, nonatomic) NSLayoutConstraint *purchaseButtonHeight; // @synthesize purchaseButtonHeight=_purchaseButtonHeight;
+- (void)scaleAnimation:(id)arg1;
+- (void)scaleToDefault:(id)arg1;
+- (void)scaleToSmall:(id)arg1;
+- (void)setPurchaseButtonText:(id)arg1;
+@property(retain, nonatomic) UITextField *textEntryField; // @synthesize textEntryField=_textEntryField;
+@property(retain, nonatomic) UIView *textEntryFieldLine; // @synthesize textEntryFieldLine=_textEntryFieldLine;
 @property(retain, nonatomic) UIView *topSeparator; // @synthesize topSeparator=_topSeparator;
-- (void)sizeToFit;
+- (void)updateConstraints;
+- (void)willMoveToSuperview:(id)arg1;
 
 @end
 

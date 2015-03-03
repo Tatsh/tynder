@@ -20,6 +20,7 @@
     BOOL _loggingOn;
     UIViewController *_viewController;
     UIWindow *_window;
+    CDUnknownBlockType _adContentLoaderBackgroundSessionCompletionHandler;
     NSTimer *_timer;
     TNDRDataManager *_dataManager;
     CDUnknownBlockType _backgroundCompletionHandler;
@@ -29,12 +30,14 @@
 }
 
 - (void).cxx_destruct;
+@property(copy, nonatomic) CDUnknownBlockType adContentLoaderBackgroundSessionCompletionHandler; // @synthesize adContentLoaderBackgroundSessionCompletionHandler=_adContentLoaderBackgroundSessionCompletionHandler;
 - (void)application:(id)arg1 didFailToRegisterForRemoteNotificationsWithError:(id)arg2;
 - (BOOL)application:(id)arg1 didFinishLaunchingWithOptions:(id)arg2;
 - (void)application:(id)arg1 didReceiveRemoteNotification:(id)arg2;
 - (void)application:(id)arg1 didReceiveRemoteNotification:(id)arg2 fetchCompletionHandler:(CDUnknownBlockType)arg3;
 - (void)application:(id)arg1 didRegisterForRemoteNotificationsWithDeviceToken:(id)arg2;
 - (void)application:(id)arg1 didRegisterUserNotificationSettings:(id)arg2;
+- (void)application:(id)arg1 handleEventsForBackgroundURLSession:(id)arg2 completionHandler:(CDUnknownBlockType)arg3;
 - (BOOL)application:(id)arg1 openURL:(id)arg2 sourceApplication:(id)arg3 annotation:(id)arg4;
 - (void)applicationDidBecomeActive:(id)arg1;
 - (void)applicationDidEnterBackground:(id)arg1;
@@ -43,12 +46,12 @@
 - (void)applicationWillResignActive:(id)arg1;
 - (void)applicationWillTerminate:(id)arg1;
 - (void)askAlertPermissions;
+- (void)authenticateIfNecessary;
 @property(copy, nonatomic) CDUnknownBlockType backgroundCompletionHandler; // @synthesize backgroundCompletionHandler=_backgroundCompletionHandler;
 - (void)checkAndUpdateApplicationVersioning;
 - (void)crashlyticsDidDetectCrashDuringPreviousExecution:(id)arg1;
 - (void)currentUserDidAuthenticate:(id)arg1;
 @property(retain, nonatomic) TNDRDataManager *dataManager; // @synthesize dataManager=_dataManager;
-- (void)didUpdateUnviewedCounts;
 - (void)enableURLTesting;
 - (void)handleBGUpdateDone:(id)arg1;
 - (BOOL)isAllowedToMakeNotificationWithType:(unsigned int)arg1;

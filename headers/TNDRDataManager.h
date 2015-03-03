@@ -40,6 +40,7 @@
     TNDRMQTTSessionManager *_mqttManager;
     NSOperationQueue *_momentsMergingOperationQueue;
     NSOperationQueue *_momentLikesMergingOperationQueue;
+    NSOperationQueue *_matchUpdatesMergingOperationQueue;
     NSTimer *_failedChoiceSendTimer;
     TNDRPopularLocationMerger *_popularLocationMerger;
 }
@@ -49,7 +50,7 @@
 - (BOOL)canCallMomentsAPISinceLastCalledTime:(id)arg1;
 @property(nonatomic) BOOL canRewindUsers; // @synthesize canRewindUsers=_canRewindUsers;
 @property(retain, nonatomic) NSFetchedResultsController *changedMatchesFetchedResultsController; // @synthesize changedMatchesFetchedResultsController=_changedMatchesFetchedResultsController;
-- (void)clearStaleRecommendations:(BOOL)arg1;
+- (void)clearStaleRecommendationsAndRefresh;
 - (void)connectToTinderMQTTBrokerAfterUpdates;
 - (void)controller:(id)arg1 didChangeObject:(id)arg2 atIndexPath:(id)arg3 forChangeType:(unsigned int)arg4 newIndexPath:(id)arg5;
 - (void)controllerDidChangeContent:(id)arg1;
@@ -84,10 +85,10 @@
 - (id)languageCodeForCurrentPreferredLanguage;
 - (id)lastSeenMomentID;
 - (id)latestMomentIDForMyMoments;
-- (void)markFriendsWhoAreMatches;
+- (void)logMergeOperationQueueStatus;
+@property(retain, nonatomic) NSOperationQueue *matchUpdatesMergingOperationQueue; // @synthesize matchUpdatesMergingOperationQueue=_matchUpdatesMergingOperationQueue;
 - (id)matchesWithMissingUserData;
 - (void)mergeBlockedMatchUpdates:(id)arg1 inContext:(id)arg2;
-- (void)mergeFriendRequestUpdates:(id)arg1 inContext:(id)arg2;
 - (BOOL)mergeMatchUpdates:(id)arg1 inContext:(id)arg2;
 - (unsigned int)mergeMomentsUpdates:(id)arg1 inContext:(id)arg2;
 - (unsigned int)mergeRecommendationUpdates:(id)arg1 inContext:(id)arg2;
@@ -103,14 +104,14 @@
 - (id)oldestMomentIDForMyMoments;
 @property(retain, nonatomic) NSDate *openedApplicationDate; // @synthesize openedApplicationDate=_openedApplicationDate;
 - (void)performPopularLocationsUpdateCompletion:(CDUnknownBlockType)arg1;
+- (void)performPostAuthProcesses;
 @property(retain, nonatomic) TNDRPopularLocationMerger *popularLocationMerger; // @synthesize popularLocationMerger=_popularLocationMerger;
 @property(nonatomic) BOOL preventNewMatchMomentQueries; // @synthesize preventNewMatchMomentQueries=_preventNewMatchMomentQueries;
 @property(nonatomic) int previousMatchCount; // @synthesize previousMatchCount=_previousMatchCount;
+- (void)queueMatchUpdateOperation:(id)arg1;
 - (void)queuePrefetchForMyMoment:(id)arg1 size:(int)arg2;
 - (void)queuePrefetchForUser:(id)arg1;
 @property(retain, nonatomic) NSTimer *recommendationsTimer; // @synthesize recommendationsTimer=_recommendationsTimer;
-- (void)removeAllIncomingMatchRequestsRelatedToUser:(id)arg1 inContext:(id)arg2;
-- (void)removeCorrespondingRecRelatedToFriendRequest:(id)arg1 inContext:(id)arg2;
 - (void)removeMomentLikesForBlockedMatchWithUserID:(id)arg1 inContext:(id)arg2;
 - (void)removeMomentsForUnfollowedMatch:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)removeMomentsForUnfollowedMatches:(id)arg1 inContext:(id)arg2;
@@ -120,6 +121,7 @@
 - (void)retrieveTutorialMoments;
 @property(retain, nonatomic) NSFetchedResultsController *rewindFetchedResultsController; // @synthesize rewindFetchedResultsController=_rewindFetchedResultsController;
 @property(readonly, nonatomic) NSArray *rewindableUsers;
+- (void)saveRetrievedMatchUpdatesToPersistentStore:(id)arg1 updatesModDateString:(id)arg2;
 - (void)saveRetrievedMomentLikesToPersistentStore:(id)arg1 shouldNotify:(BOOL)arg2;
 - (void)saveRetrievedMomentLikesToPersistentStore:(id)arg1 shouldNotify:(BOOL)arg2 completion:(CDUnknownBlockType)arg3;
 - (void)saveRetrievedMomentsToPersistentStore:(id)arg1;
@@ -130,7 +132,7 @@
 - (void)setup;
 - (void)setupChangedFetchedResultsController;
 - (void)setupMQTTClient;
-- (void)setupMomentsMergingOperationQueue;
+- (void)setupMergingOperationQueues;
 - (void)setupPrefetch;
 - (void)setupRewindFetchedResultsController;
 - (void)startFailedRecsSendTimer:(BOOL)arg1;

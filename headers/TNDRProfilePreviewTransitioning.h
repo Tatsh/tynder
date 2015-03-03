@@ -12,14 +12,14 @@
 
 @interface TNDRProfilePreviewTransitioning : NSObject <UIViewControllerAnimatedTransitioning>
 {
-    struct CGRect _photoFrame;
-    struct CGRect _infoFrame;
+    struct CGRect _previewPhotoFrame;
+    struct CGRect _previewInfoFrame;
+    int _previewPhotoNumber;
     float _scale;
-    int _photoNumber;
-    TNDRProfilePreviewViewController *_profilePreviewVC;
-    TNDRMyProfileEditViewController *_profileEditorVC;
-    struct CGRect _infoContainerFrame;
-    struct CGRect _editCellFrame;
+    TNDRProfilePreviewViewController *_previewVC;
+    TNDRMyProfileEditViewController *_editorVC;
+    struct CGRect _editorInfoContainerFrame;
+    struct CGRect _editorCellFrame;
     struct CGRect _editorFrame;
     UIView *_editorSnapshot;
     BOOL _reverse;

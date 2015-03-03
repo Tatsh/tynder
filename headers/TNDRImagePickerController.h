@@ -17,6 +17,7 @@
 + (id)viewControllerNavigationKey;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

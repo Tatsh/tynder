@@ -25,7 +25,6 @@
 - (void)handleTimeOutForPurchasesRequestTask:(id)arg1;
 - (id)init;
 @property(nonatomic, getter=isRequestingSubscriptions) BOOL requestingSubscriptions; // @synthesize requestingSubscriptions=_requestingSubscriptions;
-- (id)locallyCachedPurchases;
 - (void)processPurchasedItems:(id)arg1;
 - (void)processPurchasedItems:(id)arg1 success:(CDUnknownBlockType)arg2 failure:(CDUnknownBlockType)arg3;
 - (void)processValidatedReceiptResponse:(id)arg1 success:(CDUnknownBlockType)arg2 failure:(CDUnknownBlockType)arg3;

@@ -7,10 +7,11 @@
 #import "TNDRDialogViewController.h"
 
 #import "TNDRPaywallManagerDelegate.h"
+#import "TNDRRecommendationViewControllerRecsSessionTracking.h"
 
 @class NSAttributedString, NSString, NSTimer, TNDRLikeGamepadButton, TNDRPassportPaywallViewModel;
 
-@interface TNDRRateLimitRoadblockDialogViewController : TNDRDialogViewController <TNDRPaywallManagerDelegate>
+@interface TNDRRateLimitRoadblockDialogViewController : TNDRDialogViewController <TNDRPaywallManagerDelegate, TNDRRecommendationViewControllerRecsSessionTracking>
 {
     NSString *_otherID;
     id <TNDRTinderPlusPaywallViewControllerDelegate> _paywallDelegate;
@@ -25,6 +26,7 @@
 - (void)handleTapInView:(id)arg1;
 - (void)handleUserDidSelectPurchaseFromDialog:(id)arg1;
 @property(retain, nonatomic) TNDRLikeGamepadButton *heartDrainingView; // @synthesize heartDrainingView=_heartDrainingView;
+- (BOOL)inboundSegueShouldTriggerRecsSessionEnd;
 - (id)initWithOtherID:(id)arg1;
 @property(copy, nonatomic) NSString *otherID; // @synthesize otherID=_otherID;
 @property(nonatomic) __weak id <TNDRTinderPlusPaywallViewControllerDelegate> paywallDelegate; // @synthesize paywallDelegate=_paywallDelegate;
@@ -32,10 +34,11 @@
 - (void)paywallPurchaseFailed;
 - (void)paywallPurchaseNotAllowed;
 - (void)paywallPurchaseSucceeded;
-@property(nonatomic) __weak TNDRPassportPaywallViewModel *paywallViewModel; // @synthesize paywallViewModel=_paywallViewModel;
+@property(retain, nonatomic) TNDRPassportPaywallViewModel *paywallViewModel; // @synthesize paywallViewModel=_paywallViewModel;
 - (void)prepareRoadblockForPresentationWithCompletion:(CDUnknownBlockType)arg1;
 - (id)productInfo;
 - (void)requestDismissal;
+- (void)resizeFooterViewAfterUpdatedButtonHeight;
 @property(readonly, nonatomic) NSString *roadBlockBaseDescription;
 @property(readonly, nonatomic) NSAttributedString *roadBlockTimeLeft;
 - (id)roadBlockTimeLeftWithTimeInterval:(double)arg1;

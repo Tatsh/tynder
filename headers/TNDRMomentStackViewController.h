@@ -13,19 +13,21 @@
 #import "TNDRCardStackViewDelegate.h"
 #import "TNDRChatViewControllerDelegate.h"
 #import "TNDRMomentCardDelegate.h"
+#import "TNDRReportDialogViewControllerDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSArray, NSMutableArray, NSString, TNDRCardStackView, TNDRChatToProfileTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMoment, TNDRMoreOptionsPresenter, TNDRProfilePreviewViewController, TNDRReportViewController, UICollectionView, UIView;
+@class NSArray, NSMutableArray, NSString, TNDRChatToProfileTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMoment, TNDRMomentCardStackView, TNDRMoreOptionsPresenter, TNDRProfilePreviewViewController, TNDRReportUserDialogViewController, UICollectionView, UIView;
 
-@interface TNDRMomentStackViewController : UIViewController <TNDRMomentCardDelegate, TNDR2ProfilePreviewDelegate, TNDRCardStackViewDataSource, TNDRCardStackViewDelegate, NSFetchedResultsControllerDelegate, TNDRChatViewControllerDelegate, UIViewControllerTransitioningDelegate, TNDRActionSheetDelegate, TNDRURLNavigableProtocol>
+@interface TNDRMomentStackViewController : UIViewController <TNDRMomentCardDelegate, TNDR2ProfilePreviewDelegate, TNDRCardStackViewDataSource, TNDRCardStackViewDelegate, NSFetchedResultsControllerDelegate, TNDRChatViewControllerDelegate, UIViewControllerTransitioningDelegate, TNDRReportDialogViewControllerDelegate, TNDRActionSheetDelegate, TNDRURLNavigableProtocol>
 {
     BOOL _presentedFromChat;
+    BOOL _dialogReportSuccessful;
     id <TNDRMomentStackViewControllerDelegate> _delegate;
     UIView *_backgroundImageView;
     UICollectionView *_collectionView;
     NSMutableArray *_moments;
-    TNDRCardStackView *_momentStack;
+    TNDRMomentCardStackView *_momentStack;
     NSArray *_tutorialMoments;
     UIView *_backgroundView;
     int _infoViewStyle;
@@ -36,7 +38,7 @@
     int _numberOfTutorialMomentsNeedingAction;
     TNDRProfilePreviewViewController *_profilePreviewForMatch;
     TNDRChatViewController *_chatViewController;
-    TNDRReportViewController *_reportViewController;
+    TNDRReportUserDialogViewController *_reportUserDialogViewController;
     struct CGRect _cardStartRect;
     struct CGRect _initialFrame;
 }
@@ -59,6 +61,7 @@
 - (void)dealloc;
 - (void)decrementTutorialCountAndCheckCompletion;
 @property(nonatomic) __weak id <TNDRMomentStackViewControllerDelegate> delegate; // @synthesize delegate=_delegate;
+@property(nonatomic) BOOL dialogReportSuccessful; // @synthesize dialogReportSuccessful=_dialogReportSuccessful;
 - (void)didBeginSwiping;
 - (void)didBlockUser;
 - (void)didSwipeLeft;
@@ -82,7 +85,7 @@
 - (void)likeAndMessageUserForTopCard;
 - (void)loadView;
 @property(retain, nonatomic) TNDRMoment *moment; // @synthesize moment=_moment;
-@property(retain, nonatomic) TNDRCardStackView *momentStack; // @synthesize momentStack=_momentStack;
+@property(retain, nonatomic) TNDRMomentCardStackView *momentStack; // @synthesize momentStack=_momentStack;
 @property(retain, nonatomic) NSMutableArray *moments; // @synthesize moments=_moments;
 @property(retain, nonatomic) TNDRMatchToChatAnimationController *momentsToChatAnimationController; // @synthesize momentsToChatAnimationController=_momentsToChatAnimationController;
 @property(retain, nonatomic) TNDRMoreOptionsPresenter *moreOptionHelper; // @synthesize moreOptionHelper=_moreOptionHelper;
@@ -96,7 +99,9 @@
 - (void)registerNotifications;
 - (void)removeUnfollowedMoments;
 - (void)reportButtonTapped;
-@property(retain, nonatomic) TNDRReportViewController *reportViewController; // @synthesize reportViewController=_reportViewController;
+@property(retain, nonatomic) TNDRReportUserDialogViewController *reportUserDialogViewController; // @synthesize reportUserDialogViewController=_reportUserDialogViewController;
+- (void)requestDismissReportDialogCancelled;
+- (void)requestDismissReportDialogReportSucceeded;
 - (void)returningCardToCenter;
 @property(retain, nonatomic) NSArray *tutorialMoments; // @synthesize tutorialMoments=_tutorialMoments;
 - (void)setupCollectionView;
@@ -119,6 +124,7 @@
 - (void)willEndSwiping;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

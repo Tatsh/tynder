@@ -6,7 +6,11 @@
 
 #import "NSObject.h"
 
+@class TNDRDialogViewController;
+
 @protocol TNDRDialogViewControllerDelegate <NSObject>
-- (void)dialogRequestsDismissal;
+
+@optional
+- (void)dialogViewControllerRequestsDismissal:(TNDRDialogViewController *)arg1;
 @end
 

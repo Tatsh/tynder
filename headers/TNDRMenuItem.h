@@ -10,7 +10,6 @@
 
 @interface TNDRMenuItem : NSObject
 {
-    BOOL _isEnabledOnlyWithFriends;
     UIImage *_iconImage;
     NSString *_title;
     NSString *_info;
@@ -24,7 +23,6 @@
 @property(copy, nonatomic) NSString *info; // @synthesize info=_info;
 - (id)initWithIconImage:(id)arg1 title:(id)arg2 info:(id)arg3 actionBlock:(CDUnknownBlockType)arg4;
 - (id)initWithIconImage:(id)arg1 title:(id)arg2 info:(id)arg3 viewControllerClass:(Class)arg4;
-@property(nonatomic) BOOL isEnabledOnlyWithFriends; // @synthesize isEnabledOnlyWithFriends=_isEnabledOnlyWithFriends;
 @property(copy, nonatomic) NSString *title; // @synthesize title=_title;
 @property(retain, nonatomic) Class viewControllerClass; // @synthesize viewControllerClass=_viewControllerClass;
 

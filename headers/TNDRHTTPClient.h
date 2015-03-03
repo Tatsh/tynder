@@ -19,6 +19,7 @@
 + (id)sharedDebugHTTPClient;
 + (id)sharedHTTPClient;
 - (void).cxx_destruct;
+- (void)acceptAccountWarningNotice:(CDUnknownBlockType)arg1;
 - (void)acceptMatchRequestFromUser:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)addMatchWithID:(id)arg1 toListWithID:(id)arg2 withCompletionHandler:(CDUnknownBlockType)arg3;
 - (void)addMatchesWithIDs:(id)arg1 toListWithID:(id)arg2 withCompletionHandler:(CDUnknownBlockType)arg3;
@@ -43,6 +44,7 @@
 - (void)deleteMomentWithID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)followMatch:(id)arg1 shouldFollow:(BOOL)arg2 completion:(CDUnknownBlockType)arg3;
 - (id)formattedTokenFromData:(id)arg1;
+- (id)fullApplicationVersion;
 - (void)handleAuthenticationFailure:(id)arg1 error:(id)arg2 completionBlock:(CDUnknownBlockType)arg3;
 - (void)handleAuthenticationSuccess:(id)arg1 task:(id)arg2 completionBlock:(CDUnknownBlockType)arg3;
 - (BOOL)hasAuthenticationToken;

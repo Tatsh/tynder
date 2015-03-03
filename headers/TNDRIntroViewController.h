@@ -14,7 +14,6 @@
 @interface TNDRIntroViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 {
     BOOL _hasCompletedVerification;
-    BOOL _isTallScreen;
     BOOL _hasPresentedValidation;
     NSArray *_items;
     UIView *_introView;
@@ -60,7 +59,6 @@
 @property(retain, nonatomic) UIButton *infoButton; // @synthesize infoButton=_infoButton;
 - (id)initWithIntroItems:(id)arg1;
 @property(retain, nonatomic) UIView *introView; // @synthesize introView=_introView;
-@property(nonatomic) BOOL isTallScreen; // @synthesize isTallScreen=_isTallScreen;
 @property(retain, nonatomic) NSArray *items; // @synthesize items=_items;
 @property(retain, nonatomic) UIButton *loginButton; // @synthesize loginButton=_loginButton;
 - (int)numberOfSectionsInCollectionView:(id)arg1;
@@ -77,7 +75,6 @@
 @property(retain, nonatomic) UIScrollView *privacyScrollView; // @synthesize privacyScrollView=_privacyScrollView;
 @property(retain, nonatomic) UIView *privacyView; // @synthesize privacyView=_privacyView;
 - (void)scrollViewDidEndDecelerating:(id)arg1;
-- (void)setup;
 - (void)setupPrivacyView;
 - (void)viewDidAppear:(BOOL)arg1;
 - (void)viewDidDisappear:(BOOL)arg1;

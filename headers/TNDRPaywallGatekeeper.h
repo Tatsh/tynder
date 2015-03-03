@@ -32,7 +32,6 @@
 - (void).cxx_destruct;
 @property(retain, nonatomic) NSArray *activePurchases; // @synthesize activePurchases=_activePurchases;
 @property(readonly, nonatomic) NSArray *activePurchasesProductIdentifiers;
-- (void)addPurchases:(id)arg1;
 - (void)attemptValidatingPurchaseReceipt:(id)arg1 transaction:(id)arg2 success:(CDUnknownBlockType)arg3 failure:(CDUnknownBlockType)arg4;
 - (void)checkReceiptVerificationTaskStatus:(id)arg1;
 - (void)clearPaywallInformation;
@@ -49,6 +48,7 @@
 @property(retain, nonatomic) TNDRPurchasesViewModel *purchasesViewModel; // @synthesize purchasesViewModel=_purchasesViewModel;
 @property(retain, nonatomic) NSData *receiptToVerify; // @synthesize receiptToVerify=_receiptToVerify;
 @property(retain, nonatomic) NSData *receiptVerified; // @synthesize receiptVerified=_receiptVerified;
+- (void)reloadPurchases:(id)arg1;
 - (void)requestPaywallInformation;
 - (void)requestPaywallViewModel:(CDUnknownBlockType)arg1;
 - (void)requestProductIdsWithCompletion:(CDUnknownBlockType)arg1;

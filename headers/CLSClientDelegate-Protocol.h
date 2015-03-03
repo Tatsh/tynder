@@ -10,6 +10,7 @@
 
 @protocol CLSClientDelegate <NSObject>
 - (NSString *)APIKey;
+- (NSDictionary *)alternateExecutableSlices;
 - (NSString *)applicationName;
 - (NSString *)builtSDKVersion;
 - (NSString *)bundleId;

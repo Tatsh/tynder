@@ -12,17 +12,32 @@
 
 + (void)setSharedTracker:(id)arg1;
 + (id)sharedTracker;
++ (id)stringFromAdDetailsType:(unsigned int)arg1;
++ (id)stringFromAdFormat:(unsigned int)arg1;
++ (id)stringFromAdMethod:(unsigned int)arg1;
++ (id)stringFromAdPresentingScene:(unsigned int)arg1;
++ (id)stringFromAdType:(unsigned int)arg1;
 - (id)currentUser;
 - (id)init;
 - (void)setup;
 - (void)trackAccountViewIntro;
+- (void)trackAdCloseForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 percentWatched:(unsigned int)arg5 presentingScene:(unsigned int)arg6 paused:(BOOL)arg7 timeViewed:(double)arg8 method:(unsigned int)arg9 rating:(unsigned int)arg10;
+- (void)trackAdCompleteForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5;
+- (void)trackAdDetailsCloseForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 type:(unsigned int)arg4 method:(unsigned int)arg5 timeViewed:(double)arg6;
+- (void)trackAdDetailsOpenForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 type:(unsigned int)arg4 presentingScene:(unsigned int)arg5;
+- (void)trackAdPlayForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5 percentWatched:(unsigned int)arg6;
+- (void)trackAdProgressForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5 percentWatched:(unsigned int)arg6;
+- (void)trackAdReplayForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5;
+- (void)trackAdSelectForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5 percentWatched:(unsigned int)arg6 type:(unsigned int)arg7 presentingScene:(unsigned int)arg8 paused:(BOOL)arg9 timeViewed:(double)arg10 method:(unsigned int)arg11;
+- (void)trackAdToggleAudioForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5;
+- (void)trackAdViewForProvider:(id)arg1 campaignOrderID:(id)arg2 creativeID:(id)arg3 mute:(BOOL)arg4 format:(unsigned int)arg5 type:(unsigned int)arg6 presentingScene:(unsigned int)arg7;
 - (void)trackAllAnalyticsForEvent:(id)arg1 properties:(id)arg2;
 - (void)trackAppCloseEvent;
 - (void)trackAppOpenEvent:(BOOL)arg1;
-- (void)trackChatBlockMatch:(id)arg1 userID:(id)arg2;
+- (void)trackChatBlockMatch:(id)arg1 userID:(id)arg2 reason:(id)arg3;
 - (void)trackChatOpenForMatchID:(id)arg1 userID:(id)arg2 fromPush:(BOOL)arg3;
-- (void)trackChatOpenProfileForMatch:(id)arg1 userID:(id)arg2;
-- (void)trackChatReportMatch:(id)arg1 userID:(id)arg2 reason:(id)arg3 otherExplanation:(id)arg4;
+- (void)trackChatOpenProfileForMatch:(id)arg1 userID:(id)arg2 locationInfoType:(unsigned int)arg3;
+- (void)trackChatReportMatch:(id)arg1 userID:(id)arg2 reason:(id)arg3 otherExplanation:(id)arg4 blocked:(BOOL)arg5;
 - (void)trackChatSendMessageToMatch:(id)arg1 userID:(id)arg2 message:(id)arg3;
 - (void)trackContactOpen;
 - (void)trackFriendsClaimID:(id)arg1;
@@ -45,11 +60,13 @@
 - (void)trackMenuClose;
 - (void)trackMenuContactTinderSelected;
 - (void)trackMenuDiscoverySettingsSelected;
+- (void)trackMenuFaqSelected;
 - (void)trackMenuOpen;
 - (void)trackMenuProfileSelected;
 - (void)trackMenuRecommendationsSelected;
 - (void)trackMenuShareSelected;
 - (void)trackMixpanelEvent:(id)arg1 properties:(id)arg2;
+- (void)trackMomentBlock:(id)arg1 match:(id)arg2 userID:(id)arg3 fromKey:(int)arg4 reason:(id)arg5;
 - (void)trackMomentDeleteForMomentWithID:(id)arg1 fromKey:(unsigned int)arg2;
 - (void)trackMomentLikesViewForMomentWithID:(id)arg1 fromKey:(unsigned int)arg2;
 - (void)trackMomentSave:(id)arg1;
@@ -85,12 +102,12 @@
 - (void)trackRecsInviteFriends;
 - (void)trackRecsPhotoViewForUser:(id)arg1 andPhoto:(id)arg2;
 - (void)trackRecsProfileCloseForUser:(id)arg1;
-- (void)trackRecsProfileOpenForUser:(id)arg1;
+- (void)trackRecsProfileOpenForUser:(id)arg1 locationInfoType:(unsigned int)arg2;
 - (void)trackRecsRateUser:(id)arg1 method:(id)arg2 fromMore:(BOOL)arg3 liked:(BOOL)arg4 isUserTraveling:(BOOL)arg5 isRecTraveling:(BOOL)arg6 tinderPlus:(BOOL)arg7;
 - (void)trackRecsReportUser:(id)arg1 reason:(id)arg2 otherExplanation:(id)arg3;
 - (void)trackRecsStart;
 - (void)trackRecsView:(id)arg1;
-- (void)trackReportMoment:(id)arg1 match:(id)arg2 userID:(id)arg3 reason:(id)arg4 otherExplanation:(id)arg5 fromType:(int)arg6;
+- (void)trackReportMoment:(id)arg1 match:(id)arg2 userID:(id)arg3 reason:(id)arg4 otherExplanation:(id)arg5 fromType:(int)arg6 blocked:(BOOL)arg7;
 - (void)trackReportRecommendation:(id)arg1 reason:(id)arg2 otherExplanation:(id)arg3;
 - (void)trackSparksEvent:(id)arg1 properties:(id)arg2;
 - (void)trackTinderPlusExitPaywallCancelWithProductInfo:(id)arg1 percentLikesLeft:(float)arg2 unlimitedLikesOffered:(BOOL)arg3;
@@ -102,6 +119,11 @@
 - (void)trackTinderPlusRoadblockViewWithProductInfo:(id)arg1 otherID:(id)arg2 percentLikesLeft:(float)arg3 timeRemaining:(long long)arg4;
 - (void)trackTinderPlusSelectPurchaseOption:(id)arg1 withPrice:(id)arg2 andLocale:(id)arg3 percentLikesLeft:(float)arg4 unlimitedLikesOffered:(BOOL)arg5;
 - (void)trackTinderPlusSkuOffered:(id)arg1;
+- (void)trackUserAcknowledgedAccountWarningDialog:(unsigned int)arg1 warningType:(int)arg2;
+- (void)trackUserLogoutFromAccountUnderReviewDialog:(unsigned int)arg1;
+- (void)trackUserLogoutFromAccountWarningDialog:(unsigned int)arg1 warningType:(int)arg2;
+- (void)trackUserViewedAccountUnderReviewDialog:(unsigned int)arg1;
+- (void)trackUserViewedAccountWarningDialog:(unsigned int)arg1 warningType:(int)arg2;
 
 @end
 

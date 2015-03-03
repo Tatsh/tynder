@@ -8,6 +8,7 @@
 
 #import "RMStoreObserver.h"
 #import "TNDRPaywallManagerDelegate.h"
+#import "TNDRRecommendationViewControllerRecsSessionTracking.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIGestureRecognizerDelegate.h"
 #import "UITableViewDataSource.h"
@@ -15,7 +16,7 @@
 
 @class NSArray, NSDictionary, NSString, TNDRPassportPaywallViewModel, UIButton, UITableView, UIView;
 
-@interface TNDRTinderPlusPaywallViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, RMStoreObserver, TNDRPaywallManagerDelegate, TNDRURLNavigableProtocol>
+@interface TNDRTinderPlusPaywallViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, RMStoreObserver, TNDRPaywallManagerDelegate, TNDRURLNavigableProtocol, TNDRRecommendationViewControllerRecsSessionTracking>
 {
     id <TNDRTinderPlusPaywallViewControllerDelegate> _delegate;
     UIView *_backgroundOverlay;
@@ -48,13 +49,14 @@
 - (void)handleTapInView:(id)arg1;
 - (void)handleTinderPlusWasActivated:(id)arg1;
 - (float)headerHeightForTableView;
+- (BOOL)inboundSegueShouldTriggerRecsSessionEnd;
 - (id)init;
 - (void)notifyPaywallPresentationReadinessWithCompletion:(CDUnknownBlockType)arg1;
 - (void)paywallPurchaseCancelled;
 - (void)paywallPurchaseFailed;
 - (void)paywallPurchaseNotAllowed;
 - (void)paywallPurchaseSucceeded;
-@property(nonatomic) __weak TNDRPassportPaywallViewModel *paywallViewModel; // @synthesize paywallViewModel=_paywallViewModel;
+@property(retain, nonatomic) TNDRPassportPaywallViewModel *paywallViewModel; // @synthesize paywallViewModel=_paywallViewModel;
 - (void)preparePaywallFrom:(unsigned int)arg1 withCompletion:(CDUnknownBlockType)arg2;
 @property(retain, nonatomic) UIButton *purchaseButton; // @synthesize purchaseButton=_purchaseButton;
 @property(readonly, nonatomic) int purchasedFromFeature;
@@ -80,6 +82,7 @@
 - (id)windowForHUD;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

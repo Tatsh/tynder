@@ -40,7 +40,6 @@
 }
 
 - (void).cxx_destruct;
-- (void)buildData:(id)arg1;
 @property(retain, nonatomic) NSString *codeID; // @synthesize codeID=_codeID;
 @property(retain, nonatomic) NSNumber *countryCode; // @synthesize countryCode=_countryCode;
 - (id)description;
@@ -60,7 +59,6 @@
 @property(retain, nonatomic) NSString *nationalPrefixForParsing; // @synthesize nationalPrefixForParsing=_nationalPrefixForParsing;
 @property(retain, nonatomic) NSString *nationalPrefixTransformRule; // @synthesize nationalPrefixTransformRule=_nationalPrefixTransformRule;
 @property(retain, nonatomic) NBPhoneNumberDesc *noInternationalDialling; // @synthesize noInternationalDialling=_noInternationalDialling;
-- (id)numberFormatArrayFromData:(id)arg1;
 @property(retain, nonatomic) NSMutableArray *numberFormats; // @synthesize numberFormats=_numberFormats;
 @property(retain, nonatomic) NBPhoneNumberDesc *pager; // @synthesize pager=_pager;
 @property(retain, nonatomic) NBPhoneNumberDesc *personalNumber; // @synthesize personalNumber=_personalNumber;

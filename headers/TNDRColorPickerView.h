@@ -6,7 +6,7 @@
 
 #import "UIView.h"
 
-@class NSArray, NSString, TNDRColorButton, UIColor, UIImage, UIImageView;
+@class NSArray, NSString, TNDRColorButton, UIColor, UIImage;
 
 @interface TNDRColorPickerView : UIView
 {
@@ -17,7 +17,7 @@
     NSArray *_colorsInHex;
     NSArray *_colorSwatchButtons;
     UIColor *_currentlySelectedColor;
-    UIImageView *_blurredSuperview;
+    UIView *_blurredSuperview;
     NSArray *_buttonStartTranslations;
     TNDRColorButton *_selectedColorButton;
     NSString *_defaultColorHex;
@@ -32,7 +32,7 @@
 - (void)adjustColorButtonsToGrid;
 - (void)adjustColorButtonsToStartPoint;
 - (void)animateColorButtonsToGrid;
-@property(retain, nonatomic) UIImageView *blurredSuperview; // @synthesize blurredSuperview=_blurredSuperview;
+@property(retain, nonatomic) UIView *blurredSuperview; // @synthesize blurredSuperview=_blurredSuperview;
 @property(retain, nonatomic) NSArray *buttonStartTranslations; // @synthesize buttonStartTranslations=_buttonStartTranslations;
 @property(retain, nonatomic) NSArray *colorButtons; // @synthesize colorButtons=_colorButtons;
 @property(retain, nonatomic) NSArray *colorSwatchButtons; // @synthesize colorSwatchButtons=_colorSwatchButtons;

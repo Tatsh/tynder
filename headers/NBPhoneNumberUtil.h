@@ -15,21 +15,12 @@
     NSMutableDictionary *regexPatternCache;
     NSLock *lockPatternCache;
     NSBundle *_libPhoneBundle;
-    NSDictionary *_coreMetaData;
-    NSMutableDictionary *_mapCCode2CN;
-    NSDictionary *_mapCN2CCode;
     NSMutableDictionary *_i18nNumberFormat;
     NSMutableDictionary *_i18nPhoneNumberDesc;
     NSMutableDictionary *_i18nPhoneMetadata;
     CTTelephonyNetworkInfo *_telephonyNetworkInfo;
 }
 
-+ (id)normalizeNonBreakingSpace:(id)arg1;
-+ (id)sharedInstance;
-+ (id)sharedInstanceForTest;
-+ (id)sharedInstanceForTestWithBundle:(id)arg1;
-+ (id)sharedInstanceWithBundle:(id)arg1;
-+ (id)stringByTrimming:(id)arg1;
 - (void).cxx_destruct;
 @property(readonly, nonatomic) NSDictionary *DIGIT_MAPPINGS;
 - (void)buildNationalNumberForParsing:(id)arg1 nationalNumber:(id *)arg2;
@@ -37,13 +28,9 @@
 - (BOOL)canBeInternationallyDialled:(id)arg1 error:(id *)arg2;
 - (BOOL)checkRegionForParsing:(id)arg1 defaultRegion:(id)arg2;
 - (id)chooseFormattingPatternForNumber:(id)arg1 nationalNumber:(id)arg2;
-- (void)clearCC2CN;
-- (void)clearCN2CC;
 - (id)componentsSeparatedByRegex:(id)arg1 regex:(id)arg2;
 - (id)convertAlphaCharactersInNumber:(id)arg1;
-@property(readonly, nonatomic) NSDictionary *coreMetaData; // @synthesize coreMetaData=_coreMetaData;
 - (id)countryCodeByCarrier;
-- (id)countryCodeFromRegionCode:(id)arg1;
 - (id)entireRegularExpressionWithPattern:(id)arg1 options:(unsigned int)arg2 error:(id *)arg3;
 - (id)errorWithObject:(id)arg1 withDomain:(id)arg2;
 - (id)extractCountryCode:(id)arg1 nationalNumber:(id *)arg2;
@@ -67,7 +54,6 @@
 - (id)formatOutOfCountryKeepingAlphaChars:(id)arg1 regionCallingFrom:(id)arg2;
 - (id)formatOutOfCountryKeepingAlphaChars:(id)arg1 regionCallingFrom:(id)arg2 error:(id *)arg3;
 - (BOOL)formattingRuleHasFirstGroupOnly:(id)arg1;
-- (id)getAllMetadata;
 - (id)getCountryCodeForRegion:(id)arg1;
 - (id)getCountryCodeForValidRegion:(id)arg1 error:(id *)arg2;
 - (id)getExampleNumber:(id)arg1 error:(id *)arg2;
@@ -77,8 +63,6 @@
 - (int)getLengthOfGeographicalAreaCode:(id)arg1 error:(id *)arg2;
 - (int)getLengthOfNationalDestinationCode:(id)arg1;
 - (int)getLengthOfNationalDestinationCode:(id)arg1 error:(id *)arg2;
-- (id)getMetadataForNonGeographicalRegion:(id)arg1;
-- (id)getMetadataForRegion:(id)arg1;
 - (id)getMetadataForRegionOrCallingCode:(id)arg1 regionCode:(id)arg2;
 - (id)getNationalSignificantNumber:(id)arg1;
 - (id)getNddPrefixForRegion:(id)arg1 stripNonDigits:(BOOL)arg2;
@@ -92,17 +76,13 @@
 - (BOOL)hasFormattingPatternForNumber:(id)arg1;
 - (BOOL)hasUnexpectedItalianLeadingZero:(id)arg1;
 - (BOOL)hasValidCountryCallingCode:(id)arg1;
-- (BOOL)hasValue:(id)arg1;
 @property(retain, nonatomic) NSMutableDictionary *i18nNumberFormat; // @synthesize i18nNumberFormat=_i18nNumberFormat;
 @property(retain, nonatomic) NSMutableDictionary *i18nPhoneMetadata; // @synthesize i18nPhoneMetadata=_i18nPhoneMetadata;
 @property(retain, nonatomic) NSMutableDictionary *i18nPhoneNumberDesc; // @synthesize i18nPhoneNumberDesc=_i18nPhoneNumberDesc;
 - (int)indexOfStringByString:(id)arg1 target:(id)arg2;
 - (id)init;
-- (void)initCC2CN;
-- (id)initForTest;
 - (void)initNormalizationMappings;
 - (void)initRegularExpressionSet;
-- (id)initWithBundle:(id)arg1 metaData:(id)arg2;
 - (BOOL)isAllDigits:(id)arg1;
 - (BOOL)isAlphaNumber:(id)arg1;
 - (BOOL)isLeadingZeroPossible:(id)arg1;
@@ -125,9 +105,6 @@
 - (BOOL)isValidRegionCode:(id)arg1;
 - (BOOL)isViablePhoneNumber:(id)arg1;
 @property(readonly, nonatomic) NSBundle *libPhoneBundle; // @synthesize libPhoneBundle=_libPhoneBundle;
-- (id)loadMetadata:(id)arg1;
-@property(retain, nonatomic) NSMutableDictionary *mapCCode2CN; // @synthesize mapCCode2CN=_mapCCode2CN;
-@property(retain, nonatomic) NSDictionary *mapCN2CCode; // @synthesize mapCN2CCode=_mapCN2CCode;
 - (id)matcheFirstByRegex:(id)arg1 regex:(id)arg2;
 - (id)matchedStringByRegex:(id)arg1 regex:(id)arg2;
 - (id)matchesByRegex:(id)arg1 regex:(id)arg2;
@@ -148,12 +125,10 @@
 - (id)parseWithPhoneCarrierRegion:(id)arg1 error:(id *)arg2;
 - (id)prefixNumberWithCountryCallingCode:(id)arg1 phoneNumberFormat:(int)arg2 formattedNationalNumber:(id)arg3 formattedExtension:(id)arg4;
 - (BOOL)rawInputContainsNationalPrefix:(id)arg1 nationalPrefix:(id)arg2 regionCode:(id)arg3;
-- (id)regionCodeFromCountryCode:(id)arg1;
 - (id)regularExpressionWithPattern:(id)arg1 options:(unsigned int)arg2 error:(id *)arg3;
 - (id)replaceFirstStringByRegex:(id)arg1 regex:(id)arg2 withTemplate:(id)arg3;
 - (id)replaceStringByRegex:(id)arg1 regex:(id)arg2 withTemplate:(id)arg3;
 @property(retain, nonatomic) CTTelephonyNetworkInfo *telephonyNetworkInfo; // @synthesize telephonyNetworkInfo=_telephonyNetworkInfo;
-- (void)setupResources:(id)arg1 metaData:(id)arg2;
 - (id)stringByReplacingOccurrencesString:(id)arg1 withMap:(id)arg2 removeNonMatches:(BOOL)arg3;
 - (int)stringPositionByRegex:(id)arg1 regex:(id)arg2;
 - (int)testNumberLengthAgainstPattern:(id)arg1 number:(id)arg2;

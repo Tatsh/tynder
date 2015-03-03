@@ -23,6 +23,8 @@
     UIView *_backgroundOverlay;
     UIView *_foregroundView;
     int photoIndex;
+    BOOL _iPhone6Screen;
+    BOOL _iPhone6PlusScreen;
     TNDRMatch *_match;
     UIImage *_blurredImage;
     NSURL *_currentUserImageURL;
@@ -58,6 +60,7 @@
 - (void)viewWillDisappear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

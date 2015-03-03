@@ -8,18 +8,20 @@
 
 #import "UIViewControllerAnimatedTransitioning.h"
 
-@class NSString, UIViewController;
+@class NSString, TNDRUserCardCell, UIViewController;
 
 @interface TNDRRecommendationToProfileAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 {
     BOOL _isPresenting;
     UIViewController *_source;
+    TNDRUserCardCell *_cell;
     double _presentationDuration;
     double _dismissalDuration;
 }
 
 - (void).cxx_destruct;
 - (void)animateTransition:(id)arg1;
+@property(retain, nonatomic) TNDRUserCardCell *cell; // @synthesize cell=_cell;
 @property(nonatomic) double dismissalDuration; // @synthesize dismissalDuration=_dismissalDuration;
 - (void)executeDismissalAnimation:(id)arg1;
 - (void)executePresentationAnimation:(id)arg1;

@@ -28,6 +28,8 @@
     NSDateFormatter *_dateFormatter;
 }
 
++ (float)defaultLineSpacing;
++ (float)defaultMargin;
 + (struct CGSize)defaultSize;
 - (void).cxx_destruct;
 @property(retain, nonatomic) UIImageView *clockIcon; // @synthesize clockIcon=_clockIcon;

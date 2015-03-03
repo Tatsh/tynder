@@ -14,6 +14,7 @@
 #import "TNDRMomentViewerViewControllerDelegate.h"
 #import "TNDRMyMomentViewerDelegate.h"
 #import "TNDRNotificationWindowDelegate.h"
+#import "TNDRReportDialogViewControllerDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIAlertViewDelegate.h"
 #import "UICollectionViewDataSource.h"
@@ -23,9 +24,9 @@
 #import "UITextViewDelegate.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSArray, NSDateFormatter, NSFetchedResultsController, NSMutableArray, NSMutableDictionary, NSString, NSTimer, PSPDFTextView, TNDR2ChatPlaceholderView, TNDRActionSheet, TNDRAttributedLabel, TNDRChatToMomentsStackAnimationController, TNDRChatToProfileTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRMatch, TNDRMiniStackView, TNDRMomentStackViewController, TNDRMomentViewerViewController, TNDRMyMomentViewerView, TNDRMyMomentsToMomentViewerAnimationController, TNDRProfilePreviewViewController, TNDRReportViewController, UIAlertView, UIButton, UICollectionView, UICollectionViewFlowLayout, UIImage, UIImageView, UINavigationBar, UIPanGestureRecognizer, UITapGestureRecognizer, UIToolbar, UIView;
+@class NSArray, NSDateFormatter, NSFetchedResultsController, NSMutableArray, NSMutableDictionary, NSString, NSTimer, PSPDFTextView, TNDR2ChatPlaceholderView, TNDRActionSheet, TNDRAttributedLabel, TNDRChatToMomentsStackAnimationController, TNDRChatToProfileTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRMatch, TNDRMiniStackView, TNDRMomentStackViewController, TNDRMomentViewerViewController, TNDRMyMomentViewerView, TNDRMyMomentsToMomentViewerAnimationController, TNDRProfilePreviewViewController, TNDRReportUserDialogViewController, UIAlertView, UIButton, UICollectionView, UICollectionViewFlowLayout, UIImage, UIImageView, UINavigationBar, UIPanGestureRecognizer, UITapGestureRecognizer, UIToolbar, UIView;
 
-@interface TNDRChatViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIViewControllerTransitioningDelegate, TNDRActionSheetDelegate, TNDRChatBubbleCellDelegate, TNDR2ProfilePreviewDelegate, TNDRMyMomentViewerDelegate, TNDRMomentStackViewControllerDelegate, TNDRNotificationWindowDelegate, TNDRMomentViewerViewControllerDelegate, UITextFieldDelegate, TNDRURLNavigableProtocol>
+@interface TNDRChatViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UITextViewDelegate, UIAlertViewDelegate, UIViewControllerTransitioningDelegate, TNDRActionSheetDelegate, TNDRChatBubbleCellDelegate, TNDR2ProfilePreviewDelegate, TNDRMyMomentViewerDelegate, TNDRMomentStackViewControllerDelegate, TNDRNotificationWindowDelegate, TNDRMomentViewerViewControllerDelegate, TNDRReportDialogViewControllerDelegate, UITextFieldDelegate, TNDRURLNavigableProtocol>
 {
     NSString *_chatCellIdentifier;
     NSString *_likeCellIdentifier;
@@ -96,7 +97,7 @@
     TNDRProfilePreviewViewController *_profilePreviewVC;
     TNDRMyMomentsToMomentViewerAnimationController *_toMomentViewerAnimationController;
     TNDRMomentViewerViewController *_momentViewerViewController;
-    TNDRReportViewController *_reportViewController;
+    TNDRReportUserDialogViewController *_reportUserDialogViewController;
     UIView *_chatViewScreenshotWithoutStack;
     struct CGRect _keyboardFrame;
 }
@@ -219,7 +220,6 @@
 - (id)predicateForMatch:(id)arg1;
 - (int)preferredStatusBarStyle;
 - (void)prepareForPresentation;
-- (void)presentMomentStackCompletion:(CDUnknownBlockType)arg1;
 - (void)presentMomentViewerForMoment:(id)arg1;
 - (id)processSayings:(id)arg1;
 @property(retain, nonatomic) TNDRProfilePreviewViewController *profilePreviewVC; // @synthesize profilePreviewVC=_profilePreviewVC;
@@ -230,7 +230,9 @@
 @property(retain, nonatomic) NSTimer *reloadTimer; // @synthesize reloadTimer=_reloadTimer;
 - (void)removeNoMessagesViewIfNecessary;
 - (void)removeRefreshHeaderFromCollectionView;
-@property(retain, nonatomic) TNDRReportViewController *reportViewController; // @synthesize reportViewController=_reportViewController;
+@property(retain, nonatomic) TNDRReportUserDialogViewController *reportUserDialogViewController; // @synthesize reportUserDialogViewController=_reportUserDialogViewController;
+- (void)requestDismissReportDialogCancelled;
+- (void)requestDismissReportDialogReportSucceeded;
 - (void)resetCellPositions;
 - (void)resizeComposeView:(BOOL)arg1;
 - (id)retrieveLikesForUser:(id)arg1;
@@ -297,6 +299,7 @@
 - (void)willEnterForeground:(id)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

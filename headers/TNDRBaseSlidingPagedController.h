@@ -32,6 +32,7 @@
     TNDRTitleButton *_titleButton;
     TNDRTitleButton *_titleR1;
     TNDRTitleButton *_titleR2;
+    int _slidingURLState;
 }
 
 - (void).cxx_destruct;
@@ -79,6 +80,7 @@
 - (void)scrollViewDidScroll:(id)arg1;
 - (void)scrollViewWillBeginDragging:(id)arg1;
 - (void)scrollViewWillEndDragging:(id)arg1 withVelocity:(struct CGPoint)arg2 targetContentOffset:(inout struct CGPoint *)arg3;
+@property(nonatomic) int slidingURLState; // @synthesize slidingURLState=_slidingURLState;
 @property(retain, nonatomic) TNDRTitleButton *titleButton; // @synthesize titleButton=_titleButton;
 @property(retain, nonatomic) TNDRTitleButton *titleL1; // @synthesize titleL1=_titleL1;
 @property(retain, nonatomic) TNDRTitleButton *titleL2; // @synthesize titleL2=_titleL2;
@@ -97,6 +99,7 @@
 - (void)transitionToViewControllerWithDirection:(int)arg1 fromIndex:(int)arg2 numberOfTimes:(int)arg3 completion:(CDUnknownBlockType)arg4;
 - (void)translateHeaderTitleItems:(float)arg1;
 - (void)updateInternalViewControllerArray:(id)arg1;
+- (void)viewDidAppear:(BOOL)arg1;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)arg1;
 - (float)xAdjustForButton:(id)arg1 side:(int)arg2 percentOffset:(float)arg3;

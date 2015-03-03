@@ -8,7 +8,7 @@
 
 #import "CLLocationManagerDelegate.h"
 
-@class CLLocation, CLLocationManager, CLPlacemark, NSArray, NSData, NSDate, NSMutableDictionary, NSMutableSet, NSNumber, NSOrderedSet, NSString, NSTimer, NSURL, TNDRProductIdsViewModel;
+@class CLLocation, CLLocationManager, CLPlacemark, NSArray, NSData, NSDate, NSMutableDictionary, NSMutableSet, NSNumber, NSOrderedSet, NSString, NSTimer, NSURL, TNDRAccountWarningsViewModel, TNDRProductIdsViewModel;
 
 @interface TNDRCurrentUser : NSObject <CLLocationManagerDelegate>
 {
@@ -16,28 +16,37 @@
     BOOL _trending;
     BOOL _newUser;
     BOOL _newSubscriber;
+    BOOL _userBlocked;
     BOOL _isSynchronizingWithServer;
     BOOL _isIOSVersion8;
     BOOL _metadataUpdateInProgress;
+    BOOL _requestedWarningStateThisSession;
     NSData *_deviceToken;
     CLPlacemark *_placemark;
     NSOrderedSet *_photos;
     NSString *_userID;
     NSNumber *_userNumber;
     NSString *_tinderID;
+    int _warningType;
     CLLocationManager *_locationManager;
     NSMutableSet *_seenUsers;
     NSDate *_lastDuplicateDate;
     NSMutableDictionary *_tinderFriends;
     TNDRProductIdsViewModel *_productIdsViewModel;
+    TNDRAccountWarningsViewModel *_accountWarningsViewModel;
     NSTimer *_rateLimitedCheckMetadataTimer;
-    long long _rateLimitingLikesResetDateForAnalytics;
 }
 
++ (id)abbreviatedStringForGender:(int)arg1;
++ (void)resetUserDefaultsValues;
 + (id)sharedCurrentUser;
 - (void).cxx_destruct;
+- (void)acceptAccountWarningNotification:(CDUnknownBlockType)arg1;
 @property(readonly, nonatomic) NSDate *accountCreated;
+@property(readonly, nonatomic) NSArray *accountWarnings;
+@property(retain, nonatomic) TNDRAccountWarningsViewModel *accountWarningsViewModel; // @synthesize accountWarningsViewModel=_accountWarningsViewModel;
 @property(readonly, nonatomic) NSString *activeSubscriptionProductIdentifier;
+- (unsigned int)adSwipeInterval;
 - (void)addPhotoWithFacebookID:(id)arg1 isMainPhoto:(BOOL)arg2 croppingRectInPercentages:(struct CGRect)arg3 completion:(CDUnknownBlockType)arg4;
 - (void)addRecentLocation:(id)arg1 placemark:(id)arg2 predeterminedTitle:(id)arg3 predeterminedDescription:(id)arg4;
 - (void)addSeenUser:(id)arg1;
@@ -48,6 +57,7 @@
 - (void)applicationWillEnterForeground:(id)arg1;
 @property(readonly, nonatomic) NSString *bio;
 @property(readonly, nonatomic) NSDate *birthdate;
+- (void)checkForPlusExpiration;
 - (void)clearUserInfoAndNotify;
 - (void)clearUserInformation;
 - (id)currentLanguageCode;
@@ -56,6 +66,7 @@
 - (void)deleteAccount:(CDUnknownBlockType)arg1;
 - (void)deletePhotoWithID:(id)arg1 completion:(CDUnknownBlockType)arg2;
 @property(retain, nonatomic) NSData *deviceToken; // @synthesize deviceToken=_deviceToken;
+@property(nonatomic, getter=didRequestWarningStateThisSession) BOOL requestedWarningStateThisSession; // @synthesize requestedWarningStateThisSession=_requestedWarningStateThisSession;
 @property(nonatomic) BOOL discoverIsEnabled;
 - (void)displayAlertForLocationChangeFailure;
 @property(readonly, nonatomic) float distanceFilter;
@@ -63,11 +74,8 @@
 - (void)facebookSessionStateChanged:(id)arg1;
 @property(readonly, nonatomic) NSDate *firstLogin;
 @property(readonly, nonatomic) NSString *firstName;
-@property(nonatomic) BOOL friendsIsEnabled;
 @property(nonatomic) int gender;
 @property(readonly, nonatomic) int genderFilter;
-- (void)getFacebookFriends:(CDUnknownBlockType)arg1;
-- (void)getFriendsAndMarkFriendsWhoAreOnTinder:(CDUnknownBlockType)arg1;
 - (void)handleRateLimitedTimerUpdate:(id)arg1;
 @property(nonatomic) BOOL hasAlreadySeenProfileEditTooltip;
 @property(nonatomic) BOOL hasAlreadySharedMoment;
@@ -94,6 +102,7 @@
 @property(readonly, nonatomic) BOOL isTinderPlusSubscriber;
 @property(nonatomic, getter=isTraveling) BOOL traveling;
 @property(nonatomic, getter=isTrending) BOOL trending; // @synthesize trending=_trending;
+@property(readonly, nonatomic, getter=isUserBlocked) BOOL userBlocked; // @synthesize userBlocked=_userBlocked;
 @property(nonatomic, getter=isVibrationEnabled) BOOL vibrationEnabled;
 @property(retain, nonatomic) NSDate *lastDuplicateDate; // @synthesize lastDuplicateDate=_lastDuplicateDate;
 @property(retain, nonatomic) NSDate *lastViewedMatches;
@@ -118,6 +127,7 @@
 @property(readonly, nonatomic) NSOrderedSet *photos; // @synthesize photos=_photos;
 @property(retain, nonatomic) CLPlacemark *placemark; // @synthesize placemark=_placemark;
 - (void)precacheUserImages;
+- (void)processAccountNotificationsJSON:(id)arg1;
 - (void)processMetadataJSON:(id)arg1;
 - (void)processProductIDJSONInformation:(id)arg1;
 - (void)processPurchasesJSONInformation:(id)arg1;
@@ -127,16 +137,19 @@
 @property(retain, nonatomic) TNDRProductIdsViewModel *productIdsViewModel; // @synthesize productIdsViewModel=_productIdsViewModel;
 @property(retain, nonatomic) NSTimer *rateLimitedCheckMetadataTimer; // @synthesize rateLimitedCheckMetadataTimer=_rateLimitedCheckMetadataTimer;
 @property(readonly, nonatomic) NSDate *rateLimitingLikesResetDate;
-@property(readonly, nonatomic) long long rateLimitingLikesResetDateForAnalytics; // @synthesize rateLimitingLikesResetDateForAnalytics=_rateLimitingLikesResetDateForAnalytics;
+@property(readonly, nonatomic) long long rateLimitingLikesResetDateForAnalytics;
 @property(nonatomic) BOOL receivesLikeNotifications;
 @property(nonatomic) BOOL receivesMatchNotifications;
 @property(nonatomic) BOOL receivesMatchRequestNotifications;
 @property(nonatomic) BOOL receivesMessageNotifications;
 @property(readonly, nonatomic) NSArray *recentLocations;
+- (void)registerForNotifications;
 - (void)removeSeenUser:(id)arg1;
+- (void)requestAccountWarningsViewModelWithCompletion:(CDUnknownBlockType)arg1;
 - (void)resetApplicationState;
 - (void)resetRateLimitingLimitations;
 - (void)restoreEncounteredValueFromSavedData;
+- (void)retrieveAccountWarningState;
 - (void)saveGlobalsToUserDefaults:(id)arg1;
 - (void)saveMinimumVersioningInformation:(id)arg1;
 - (void)saveProcessedDataIntoCoreDataUser;
@@ -152,6 +165,7 @@
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoring;
 - (id)stopTravelingCompletion:(CDUnknownBlockType)arg1;
+- (void)storeAdSwipeIntervalInDefaults:(id)arg1;
 @property(readonly, nonatomic) NSMutableDictionary *superProperties;
 - (void)synchronizeCoreDataStoreWithServer:(CDUnknownBlockType)arg1;
 @property(readonly, nonatomic) double timeIntervalUntilRateLimitReset;
@@ -167,6 +181,7 @@
 - (id)userInContext:(id)arg1;
 - (void)userLocationChanged;
 - (void)verifyLocationAccess;
+@property(readonly, nonatomic) int warningType; // @synthesize warningType=_warningType;
 
 // Remaining properties
 @property(readonly, copy) NSString *description;

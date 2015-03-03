@@ -72,6 +72,7 @@
 - (float)allowedTextMovementHeight;
 - (struct CGRect)allowedTextMovementRect;
 - (float)allowedTextMovementRegionPercent;
+- (void)animateEditingButtons;
 - (void)animateForDismissalCompletion:(CDUnknownBlockType)arg1;
 - (void)animateInColorPickerForEditState:(int)arg1;
 - (void)animateInFirstShare;
@@ -131,6 +132,7 @@
 @property(retain, nonatomic) UIView *firstShareContainer; // @synthesize firstShareContainer=_firstShareContainer;
 @property(retain, nonatomic) UIView *footerDarken; // @synthesize footerDarken=_footerDarken;
 - (void)forceUpdateLineHeightForTextView:(id)arg1;
+- (id)generateCompositeImageToShare;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;
 @property(nonatomic) BOOL hasAnimatedFromTransition; // @synthesize hasAnimatedFromTransition=_hasAnimatedFromTransition;
 - (BOOL)hasPhotoLibraryAccess;
@@ -193,6 +195,7 @@
 - (void)shareMoment;
 - (void)showColorPickerForEditState:(int)arg1;
 - (void)showFirstShareAlert;
+- (void)showMomentCompositeFailedUserAlert;
 - (void)showSupportingDrawButtons;
 - (void)showSupportingTextButtons;
 - (void)showTextEditingOptionButtons;
@@ -226,6 +229,7 @@
 - (float)widthForTextView;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

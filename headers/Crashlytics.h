@@ -63,8 +63,7 @@
 + (id)startWithAPIKey:(id)arg1 delegate:(id)arg2 afterDelay:(double)arg3 environment:(CDStruct_9c005df8)arg4;
 - (id)APIKey;
 @property(copy, nonatomic) NSDictionary *SDKKitVersions; // @synthesize SDKKitVersions=_SDKKitVersions;
-- (id)advertisingIdentifier;
-- (BOOL)advertisingTrackingEnabled;
+- (id)alternateExecutableSlices;
 @property(retain, nonatomic) CLSAnalyticsController *analyticsController; // @synthesize analyticsController=_analyticsController;
 @property(readonly, copy, nonatomic) NSString *apiKey;
 - (id)applicationName;
@@ -81,6 +80,7 @@
 - (void)controllerDidLoadSettings:(id)arg1;
 - (id)copyWithZone:(struct _NSZone *)arg1;
 - (void)crash;
+- (void)crashDidComplete;
 @property(readonly, copy, nonatomic) NSString *crashMarkerFilePath;
 - (void)dealloc;
 @property(nonatomic) BOOL debugMode;
@@ -94,13 +94,12 @@
 - (void)gatherInitialNotificationData;
 - (id)icon;
 - (id)identificationDictionary;
-- (Class)identifierManager;
 - (id)initializeWithAPIKey:(id)arg1 delay:(double)arg2 environment:(const CDStruct_9c005df8 *)arg3;
 @property(nonatomic) BOOL isSettingsLoaded; // @synthesize isSettingsLoaded=_isSettingsLoaded;
 @property(retain, nonatomic) NSDictionary *kitInfo; // @synthesize kitInfo=_kitInfo;
-- (BOOL)linksAdSupport;
 @property(nonatomic) int logBufferSize; // @synthesize logBufferSize=_logBufferSize;
 - (unsigned int)machExceptionMask;
+- (void)migrateNSUserDefaultsToCLSUserDefaults;
 - (id)minimumSDKVersion;
 - (void)raiseObjCException;
 - (oneway void)release;

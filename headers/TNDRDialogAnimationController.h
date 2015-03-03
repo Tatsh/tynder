@@ -6,19 +6,24 @@
 
 #import "NSObject.h"
 
-#import "UIViewControllerAnimatedTransitioning.h"
+#import "TNDRViewControllerAnimatedTransitioning.h"
 
-@class NSString;
+@class NSString, TNDRDialogViewController;
 
-@interface TNDRDialogAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
+@interface TNDRDialogAnimationController : NSObject <TNDRViewControllerAnimatedTransitioning>
 {
     BOOL _presenting;
+    TNDRDialogViewController *_presentingDialogViewController;
 }
 
+- (void).cxx_destruct;
+- (void)animateHideViewController:(id)arg1 sandboxBounds:(struct CGRect)arg2;
+- (void)animateShowViewController:(id)arg1 sandboxBounds:(struct CGRect)arg2;
 - (void)animateTransition:(id)arg1;
 - (void)executeDismissalAnimation:(id)arg1;
 - (void)executePresentationAnimation:(id)arg1;
 @property(nonatomic, getter=isPresenting) BOOL presenting; // @synthesize presenting=_presenting;
+@property(nonatomic) __weak TNDRDialogViewController *presentingDialogViewController; // @synthesize presentingDialogViewController=_presentingDialogViewController;
 - (double)transitionDuration:(id)arg1;
 
 // Remaining properties

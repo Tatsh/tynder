@@ -26,13 +26,11 @@
 @property(retain, nonatomic) NSString *format; // @synthesize format=_format;
 - (id)init;
 - (id)initWithCoder:(id)arg1;
-- (id)initWithData:(id)arg1;
+- (id)initWithPattern:(id)arg1 withFormat:(id)arg2 withLeadingDigitsPatterns:(id)arg3 withNationalPrefixFormattingRule:(id)arg4 whenFormatting:(BOOL)arg5 withDomesticCarrierCodeFormattingRule:(id)arg6;
 @property(retain, nonatomic) NSMutableArray *leadingDigitsPatterns; // @synthesize leadingDigitsPatterns=_leadingDigitsPatterns;
 @property(retain, nonatomic) NSString *nationalPrefixFormattingRule; // @synthesize nationalPrefixFormattingRule=_nationalPrefixFormattingRule;
 @property(nonatomic) BOOL nationalPrefixOptionalWhenFormatting; // @synthesize nationalPrefixOptionalWhenFormatting=_nationalPrefixOptionalWhenFormatting;
 @property(retain, nonatomic) NSString *pattern; // @synthesize pattern=_pattern;
-- (void)setData:(id)arg1;
-- (id)stringArrayFromData:(id)arg1;
 
 @end
 

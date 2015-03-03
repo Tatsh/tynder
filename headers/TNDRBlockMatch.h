@@ -6,12 +6,14 @@
 
 #import "NSObject.h"
 
+#import "TNDRUnmatchReasonDialogViewControllerDelegate.h"
 #import "UIAlertViewDelegate.h"
 
-@class NSString, TNDRMatch, UIAlertView;
+@class NSString, TNDRMatch, TNDRUnmatchReasonDialogViewController, UIAlertView;
 
-@interface TNDRBlockMatch : NSObject <UIAlertViewDelegate>
+@interface TNDRBlockMatch : NSObject <UIAlertViewDelegate, TNDRUnmatchReasonDialogViewControllerDelegate>
 {
+    TNDRUnmatchReasonDialogViewController *_unmatchReasonsDialogViewController;
     TNDRMatch *_match;
     UIAlertView *_blockAlertView;
     CDUnknownBlockType _completion;
@@ -19,13 +21,18 @@
 
 + (id)sharedBlockMatch;
 - (void).cxx_destruct;
-- (void)alertView:(id)arg1 clickedButtonAtIndex:(int)arg2;
 @property(retain, nonatomic) UIAlertView *blockAlertView; // @synthesize blockAlertView=_blockAlertView;
-- (void)blockConfirmedUnmatchMatch;
-- (void)blockMatchWithConfirmation:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (id)blockMatchWithReasons:(id)arg1 completion:(CDUnknownBlockType)arg2;
+- (void)completeBlockAndReport:(BOOL)arg1 reason:(unsigned int)arg2;
 @property(copy) CDUnknownBlockType completion; // @synthesize completion=_completion;
-- (void)confirmBlockingMatch;
+- (void)dialogViewControllerRequestsDismissal:(id)arg1;
 @property(retain, nonatomic) TNDRMatch *match; // @synthesize match=_match;
+- (void)reportWithBlockAnalytics:(id)arg1 user:(id)arg2 reason:(id)arg3 message:(id)arg4;
+- (void)requestDismissUnmatchCancelled;
+- (void)requestDismissUnmatchDialogForReason:(unsigned int)arg1 message:(id)arg2;
+@property(retain, nonatomic) TNDRUnmatchReasonDialogViewController *unmatchReasonsDialogViewController; // @synthesize unmatchReasonsDialogViewController=_unmatchReasonsDialogViewController;
+- (void)showBlockAndReportFailed;
+- (void)showBlockAndReportInProgress;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

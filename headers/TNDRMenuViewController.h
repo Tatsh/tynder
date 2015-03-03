@@ -58,7 +58,6 @@
 @property(nonatomic) BOOL dismissing; // @synthesize dismissing=_dismissing;
 - (void)doneButtonPressed:(id)arg1;
 - (void)editButtonPressed:(id)arg1;
-- (BOOL)friendsIsEnabled;
 @property(retain, nonatomic) TNDRMenuHeaderView *headerView; // @synthesize headerView=_headerView;
 - (id)initWithItems:(id)arg1;
 @property(retain, nonatomic) NSArray *items; // @synthesize items=_items;
@@ -98,7 +97,6 @@
 - (void)updateBackgroundImageViewWithImage:(id)arg1;
 - (void)updateBlurredBackground:(id)arg1;
 - (void)updateHeaderImagesIfCachedDataIsAvailable;
-- (void)updateItemsForFriendsChange;
 - (void)updateNameLabel;
 - (void)updateProfilePictureImageView:(id)arg1;
 - (void)userDataCleared:(id)arg1;

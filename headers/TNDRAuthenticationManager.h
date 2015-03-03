@@ -66,11 +66,14 @@
 @property(nonatomic) int numTinderAuthRetries; // @synthesize numTinderAuthRetries=_numTinderAuthRetries;
 - (BOOL)openFacebookSessionWithAllowLoginUI:(BOOL)arg1;
 - (void)performOperationForFacebookSessionState:(unsigned int)arg1;
+- (void)performPostTinderServerAuthenticationProcess:(id)arg1;
+- (void)performUserAuthenticationVerification:(id)arg1;
 @property(retain, nonatomic) UIAlertView *permissionsRequestAlertView; // @synthesize permissionsRequestAlertView=_permissionsRequestAlertView;
 - (void)presentAgeAndGenderVerificationViewController;
 - (void)presentAgeAndGenderVerificationViewControllerFrom:(id)arg1;
 - (void)presentSMSVerificationViewController;
 - (void)presentSMSVerificationViewControllerFrom:(id)arg1;
+- (void)processAuthenticationJSON:(id)arg1;
 @property(retain, nonatomic) Reachability *reachability; // @synthesize reachability=_reachability;
 - (void)removeFacebookAppAndRetryFBAuthentication;
 - (void)removeRoadblockViewControllers;
@@ -82,12 +85,15 @@
 - (void)retryAuthenticationForFailedResponse:(id)arg1 request:(id)arg2;
 - (void)retryFacebookAuthentication;
 - (id)rootViewController;
+- (void)saveGlobalsToUserDefaults:(id)arg1;
 - (void)saveGraphUserInfoToDefaults:(id)arg1;
 - (void)saveInformationForGraphUser:(id)arg1;
+- (void)saveMinimumVersioningInformation:(id)arg1;
 - (void)sessionStateChanged:(id)arg1 state:(unsigned int)arg2 error:(id)arg3;
 - (void)setSharedManager:(id)arg1;
 @property(retain, nonatomic) NSTimer *tinderAuthRetryTimer; // @synthesize tinderAuthRetryTimer=_tinderAuthRetryTimer;
 - (void)setup;
+- (void)setupAuthorizationDependentObjects;
 - (void)setupNotifications;
 - (BOOL)shouldNotifyUserForError:(id)arg1;
 - (BOOL)shouldNotifyUserForTinderHandledError:(id)arg1;
@@ -112,7 +118,6 @@
 - (id)topMostController;
 - (id)underlyingErrorCodeFromFacebookError:(id)arg1;
 - (void)validationSuccessCompleteAuthorization;
-- (void)verifyInformationAndSaveJSON:(id)arg1;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

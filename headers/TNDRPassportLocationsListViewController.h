@@ -6,6 +6,7 @@
 
 #import "UIViewController.h"
 
+#import "TNDRRecommendationViewControllerRecsSessionTracking.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIGestureRecognizerDelegate.h"
 #import "UITableViewDataSource.h"
@@ -14,7 +15,7 @@
 
 @class NSIndexPath, NSLayoutConstraint, NSString, TNDRPassportLocationsHeaderView, TNDRPassportLocationsListViewModel, UIButton, UIImage, UIImageView, UITableView, UITapGestureRecognizer, UIView;
 
-@interface TNDRPassportLocationsListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, TNDRURLNavigableProtocol>
+@interface TNDRPassportLocationsListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, TNDRURLNavigableProtocol, TNDRRecommendationViewControllerRecsSessionTracking>
 {
     UIView *_backgroundOverlay;
     UIView *_outerContainerView;
@@ -57,6 +58,7 @@
 @property(retain, nonatomic) UIImageView *downArrowImageView; // @synthesize downArrowImageView=_downArrowImageView;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;
 - (void)handleUserAuthenticated:(id)arg1;
+- (BOOL)inboundSegueShouldTriggerRecsSessionEnd;
 - (id)initWithViewModel:(id)arg1;
 @property(nonatomic) int locationsListState; // @synthesize locationsListState=_locationsListState;
 @property(retain, nonatomic) UITableView *locationsTableView; // @synthesize locationsTableView=_locationsTableView;
@@ -80,6 +82,7 @@
 - (void)viewWillDisappear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

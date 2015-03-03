@@ -9,7 +9,14 @@
 @interface NSAttributedString (TNDRAttributedString)
 + (id)tinderAttributedStringForDialogHeaderDetailText:(id)arg1;
 + (id)tinderAttributedStringForDialogHeaderTitle:(id)arg1;
++ (id)tinderAttributedStringForRateLimitDialogHeaderTitle:(id)arg1;
 + (id)tinderAttributedStringForReportingDialogHeaderDetailText:(id)arg1;
 + (id)tinderAttributedStringForReportingDialogHeaderTitle:(id)arg1;
++ (id)tinderAttributesForDialogHeaderDetailText;
++ (id)tinderAttributesForDialogHeaderTitle;
++ (id)tinderAttributesForReportingDialogHeaderDetailText;
++ (id)tinderAttributesForReportingDialogHeaderTitle;
++ (id)tinderAttributesForUnmatchDialogHeaderDetailText;
++ (id)tinderAttributesForUnmatchDialogHeaderTitle;
 @end
 

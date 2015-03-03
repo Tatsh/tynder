@@ -6,7 +6,7 @@
 
 #import "UIView.h"
 
-@class NSString, UIButton, UIImageView, UILabel;
+@class NSString, UIActivityIndicatorView, UIButton, UIImageView, UILabel;
 
 @interface TNDRDiscoverOffView : UIView
 {
@@ -19,9 +19,11 @@
     UILabel *_discoverOffDescriptionLabel;
     UIImageView *_cardOutlines;
     UIImageView *_gamePadInactive;
+    UIActivityIndicatorView *_activityIndicator;
 }
 
 - (void).cxx_destruct;
+@property(retain, nonatomic) UIActivityIndicatorView *activityIndicator; // @synthesize activityIndicator=_activityIndicator;
 - (void)animateOut:(CDUnknownBlockType)arg1;
 @property(retain, nonatomic) UIImageView *cardOutlines; // @synthesize cardOutlines=_cardOutlines;
 @property(nonatomic) __weak id <TNDRDiscoverOffViewDelegate> delegate; // @synthesize delegate=_delegate;
@@ -33,6 +35,7 @@
 - (id)initWithFrame:(struct CGRect)arg1;
 - (void)layoutSubviews;
 - (void)setup;
+- (void)viewShouldAppearBusy:(BOOL)arg1;
 
 @end
 

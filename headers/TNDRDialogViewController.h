@@ -6,43 +6,52 @@
 
 #import "UIViewController.h"
 
+#import "TNDRDialogViewControllerPriority.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIGestureRecognizerDelegate.h"
 #import "UITableViewDataSource.h"
 
-@class NSString, TNDRDialogFooter, TNDRDialogHeader, UITableView, UIView;
+@class NSString, TNDRDialogFooter, TNDRDialogHeader, UITableView, UITapGestureRecognizer, UIView;
 
-@interface TNDRDialogViewController : UIViewController <UITableViewDataSource, UIGestureRecognizerDelegate, TNDRURLNavigableProtocol>
+@interface TNDRDialogViewController : UIViewController <UITableViewDataSource, TNDRURLNavigableProtocol, TNDRDialogViewControllerPriority, UIGestureRecognizerDelegate>
 {
     BOOL _opaqueContent;
+    BOOL _tapShouldDismiss;
+    BOOL _shouldAnimateBeforeDismiss;
     TNDRDialogHeader *_headerView;
     TNDRDialogFooter *_footerView;
     UIView *_backgroundOverlay;
     UIView *_containerView;
     UITableView *_tableView;
     id <TNDRDialogViewControllerDelegate> _delegate;
-    id <UIViewControllerAnimatedTransitioning> _animationController;
+    float _numberOfRowsToDisplay;
+    UITapGestureRecognizer *_dismissOnTapGestureRecognizer;
 }
 
 + (id)viewControllerNavigationKey;
 - (void).cxx_destruct;
 - (void)adjustContentDimensions;
-@property(retain, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController; // @synthesize animationController=_animationController;
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning><TNDRViewControllerAnimatedTransitioning> animationController;
 @property(retain, nonatomic) UIView *backgroundOverlay; // @synthesize backgroundOverlay=_backgroundOverlay;
 @property(retain, nonatomic) UIView *containerView; // @synthesize containerView=_containerView;
 @property(nonatomic) __weak id <TNDRDialogViewControllerDelegate> delegate; // @synthesize delegate=_delegate;
+@property(readonly, nonatomic) unsigned int dialogPriority;
+@property(retain, nonatomic) UITapGestureRecognizer *dismissOnTapGestureRecognizer; // @synthesize dismissOnTapGestureRecognizer=_dismissOnTapGestureRecognizer;
 @property(retain, nonatomic) TNDRDialogFooter *footerView; // @synthesize footerView=_footerView;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;
 - (void)handleTapInView:(id)arg1;
 @property(nonatomic, getter=hasOpaqueContent, setter=setOpaqueContent:) BOOL opaqueContent; // @synthesize opaqueContent=_opaqueContent;
 @property(retain, nonatomic) TNDRDialogHeader *headerView; // @synthesize headerView=_headerView;
-- (id)init;
+@property(nonatomic) float numberOfRowsToDisplay; // @synthesize numberOfRowsToDisplay=_numberOfRowsToDisplay;
+- (void)requestDismissal;
+@property(nonatomic) BOOL shouldAnimateBeforeDismiss; // @synthesize shouldAnimateBeforeDismiss=_shouldAnimateBeforeDismiss;
 @property(retain, nonatomic) UITableView *tableView; // @synthesize tableView=_tableView;
-- (void)setup;
+@property(nonatomic) BOOL tapShouldDismiss; // @synthesize tapShouldDismiss=_tapShouldDismiss;
 - (void)setupGestureRecognizer;
 - (id)tableView:(id)arg1 cellForRowAtIndexPath:(id)arg2;
 - (int)tableView:(id)arg1 numberOfRowsInSection:(int)arg2;
 - (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)arg1;
 
 // Remaining properties
 @property(readonly, copy) NSString *debugDescription;

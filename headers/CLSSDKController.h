@@ -49,6 +49,7 @@
 - (void)loadSettings:(CDUnknownBlockType)arg1;
 - (BOOL)moveItemAtPath:(id)arg1 toDirectory:(id)arg2;
 - (BOOL)moveItemsFromDirectory:(id)arg1 toDirectory:(id)arg2;
+- (void)movePreparedToSendableAndSubmitSettingAlwaysFlag:(BOOL)arg1;
 - (void)onboardOrStartReportColletion;
 @property(readonly, copy, nonatomic) NSString *preparedDirectory;
 - (void)processExistingRecords:(BOOL)arg1;
@@ -66,7 +67,6 @@
 - (void)startReportingAfterDelay:(double)arg1;
 - (void)submitFiles;
 - (void)submitInvalidFiles;
-- (void)submitReportsSettingAlwaysFlag:(BOOL)arg1;
 
 @end
 

@@ -10,13 +10,15 @@
 #import "TNDRNotificationWindowDelegate.h"
 #import "TNDRPhotoPageControllerDelegate.h"
 #import "TNDRProfileEditorChangedData.h"
+#import "TNDRRecommendationViewControllerRecsSessionTracking.h"
+#import "TNDRReportDialogViewControllerDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
 #import "UIScrollViewDelegate.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSArray, NSManagedObjectContext, NSString, StyledPageControl, TNDRActionSheet, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMyProfileEditViewController, TNDRPhotoPageController, TNDRProfileHorizontalViewController, TNDRUser, UIAlertView, UIButton, UILabel, UINavigationBar, UIScrollView, UITextView, UIView;
+@class NSArray, NSManagedObjectContext, NSString, StyledPageControl, TNDRActionSheet, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMyProfileEditViewController, TNDRPhotoPageController, TNDRProfileHorizontalViewController, TNDRReportUserDialogViewController, TNDRUser, UIAlertView, UIButton, UILabel, UINavigationBar, UIScrollView, UITextView, UIView;
 
-@interface TNDRProfilePreviewViewController : UIViewController <TNDRPhotoPageControllerDelegate, TNDRActionSheetDelegate, TNDRNotificationWindowDelegate, UIViewControllerTransitioningDelegate, TNDRProfileEditorChangedData, UIScrollViewDelegate, TNDRURLNavigableProtocol>
+@interface TNDRProfilePreviewViewController : UIViewController <TNDRPhotoPageControllerDelegate, TNDRActionSheetDelegate, TNDRNotificationWindowDelegate, UIViewControllerTransitioningDelegate, TNDRReportDialogViewControllerDelegate, TNDRProfileEditorChangedData, UIScrollViewDelegate, TNDRURLNavigableProtocol, TNDRRecommendationViewControllerRecsSessionTracking>
 {
     UIView *_backgroundView;
     NSArray *_photos;
@@ -54,6 +56,7 @@
     BOOL _presentingMatch;
     BOOL _likeOnDismiss;
     BOOL _passOnDismiss;
+    BOOL _shouldDismissAfterReporting;
     id <TNDR2ProfilePreviewDelegate> _delegate;
     TNDRUser *_user;
     UINavigationBar *_navigationBar;
@@ -63,6 +66,7 @@
     UIScrollView *_mainScrollView;
     UIView *_navigationBarSnapshot;
     NSManagedObjectContext *_context;
+    TNDRReportUserDialogViewController *_reportUserDialogViewController;
 }
 
 + (id)viewControllerNavigationKey;
@@ -97,6 +101,7 @@
 - (void)handleRequestToShowStatusBar:(id)arg1;
 - (float)heightForText:(id)arg1 fontSize:(unsigned int)arg2 attributes:(id)arg3;
 - (void)hideMomentsButtonTapped;
+- (BOOL)inboundSegueShouldTriggerRecsSessionEnd;
 @property(retain, nonatomic) UIView *infoView; // @synthesize infoView=_infoView;
 - (id)init;
 - (id)interactionControllerForDismissal:(id)arg1;
@@ -128,7 +133,11 @@
 - (void)presentChatForMatch;
 - (void)registerNotifications;
 - (void)reportButtonTapped;
+@property(retain, nonatomic) TNDRReportUserDialogViewController *reportUserDialogViewController; // @synthesize reportUserDialogViewController=_reportUserDialogViewController;
+- (void)requestDismissReportDialogCancelled;
+- (void)requestDismissReportDialogReportSucceeded;
 - (void)scrollViewDidScroll:(id)arg1;
+@property(nonatomic) BOOL shouldDismissAfterReporting; // @synthesize shouldDismissAfterReporting=_shouldDismissAfterReporting;
 @property(retain, nonatomic) TNDRUser *user; // @synthesize user=_user;
 - (void)setupActionSheet;
 - (void)setupFollowHideButtons;
@@ -157,6 +166,7 @@
 - (float)widthForText:(id)arg1 fontSize:(unsigned int)arg2;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

@@ -13,7 +13,7 @@
 #import "UITableViewDataSource.h"
 #import "UITableViewDelegate.h"
 
-@class CLLocationManager, FBKVOController, NSArray, NSString, NSTimer, TNDRPassportMapSearchLocationViewModel, TNDRPassportMapSearchView, TNDRPassportMapViewController, UIBarButtonItem, UINavigationController, UISearchBar, UISearchDisplayController, UITableView, UITapGestureRecognizer;
+@class CLLocationManager, FBKVOController, NSArray, NSDate, NSString, NSTimer, TNDRPassportMapSearchLocationViewModel, TNDRPassportMapSearchView, TNDRPassportMapViewController, UIBarButtonItem, UINavigationController, UISearchBar, UISearchDisplayController, UITableView, UITapGestureRecognizer;
 
 @interface TNDRPassportMapSearchViewController : UIViewController <UIGestureRecognizerDelegate, TNDRPassportMapViewDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UISearchDisplayDelegate>
 {
@@ -33,6 +33,8 @@
     UITapGestureRecognizer *_tapGestureRecognizer;
     NSTimer *_autoCompleteSearchTimer;
     NSArray *_popularLocationsList;
+    NSDate *_pinDropStartTime;
+    NSDate *_pinDropEndTime;
 }
 
 - (void).cxx_destruct;
@@ -43,6 +45,7 @@
 @property(retain, nonatomic) TNDRPassportMapSearchView *containerView; // @synthesize containerView=_containerView;
 - (void)dealloc;
 @property(nonatomic) __weak id <TNDRPassportMapSearchViewControllerDelegate><TNDRPassportPaywallDelegate> delegate; // @synthesize delegate=_delegate;
+- (void)didEndMovingToAnnotatedLocation:(id)arg1;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;
 - (void)keyboardWillHide;
 @property(retain, nonatomic) FBKVOController *kvoController; // @synthesize kvoController=_kvoController;
@@ -53,6 +56,8 @@
 @property(retain, nonatomic) TNDRPassportMapViewController *mapViewController; // @synthesize mapViewController=_mapViewController;
 - (void)mapViewTapped;
 @property(retain, nonatomic) UINavigationController *navigationController; // @synthesize navigationController=_navigationController;
+@property(retain, nonatomic) NSDate *pinDropEndTime; // @synthesize pinDropEndTime=_pinDropEndTime;
+@property(retain, nonatomic) NSDate *pinDropStartTime; // @synthesize pinDropStartTime=_pinDropStartTime;
 @property(retain, nonatomic) NSArray *popularLocationsList; // @synthesize popularLocationsList=_popularLocationsList;
 @property(retain, nonatomic) UISearchBar *searchBar; // @synthesize searchBar=_searchBar;
 - (void)searchBar:(id)arg1 textDidChange:(id)arg2;

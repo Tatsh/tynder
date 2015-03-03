@@ -117,7 +117,6 @@
 @property(retain, nonatomic) UIButton *placeholderShareButton; // @synthesize placeholderShareButton=_placeholderShareButton;
 - (int)preferredStatusBarStyle;
 - (BOOL)prefersStatusBarHidden;
-- (void)presentImagePickerCompletion:(CDUnknownBlockType)arg1;
 - (BOOL)redirectionToSettingsAppIsSupported;
 - (void)registerNotifications;
 - (void)removeCaptureOutputFromDeviceInput;
@@ -149,6 +148,7 @@
 - (void)zoomVideoToScale:(float)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

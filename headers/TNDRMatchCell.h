@@ -18,7 +18,6 @@
     NSString *_promptText;
     UIView *_flashBackgroundView;
     BOOL _momentsCell;
-    BOOL _incomingMatchRequestCell;
     UIImageView *_avatarImageView;
     UILabel *_nameLabel;
     UILabel *_messageLabel;
@@ -26,7 +25,6 @@
     UIImageView *_rightImageView;
     UIButton *_acceptButton;
     UIButton *_ignoreButton;
-    id <TNDRMatchCellDelegate> _delegate;
 }
 
 - (void).cxx_destruct;
@@ -34,17 +32,13 @@
 @property(retain, nonatomic) UIButton *acceptButton; // @synthesize acceptButton=_acceptButton;
 - (void)adjustContentViewsAlphaForScrollOffset:(float)arg1;
 @property(retain, nonatomic) UIImageView *avatarImageView; // @synthesize avatarImageView=_avatarImageView;
-@property(nonatomic) __weak id <TNDRMatchCellDelegate> delegate; // @synthesize delegate=_delegate;
 - (id)detailTextLabel;
 - (void)flashBackgroundForAcceptCompletion:(CDUnknownBlockType)arg1;
 - (void)flashBackgroundForIgnoreCompletion:(CDUnknownBlockType)arg1;
 @property(retain, nonatomic) UIButton *followingButton; // @synthesize followingButton=_followingButton;
-- (void)handleAcceptButtonTapped:(id)arg1;
-- (void)handleIgnoreButtonTapped:(id)arg1;
 @property(retain, nonatomic) UIButton *ignoreButton; // @synthesize ignoreButton=_ignoreButton;
 - (id)imageView;
 - (id)initWithStyle:(int)arg1 reuseIdentifier:(id)arg2;
-@property(nonatomic, getter=isIncomingMatchRequestCell) BOOL incomingMatchRequestCell; // @synthesize incomingMatchRequestCell=_incomingMatchRequestCell;
 @property(nonatomic, getter=isMomentsCell) BOOL momentsCell; // @synthesize momentsCell=_momentsCell;
 - (void)layoutSubviews;
 @property(retain, nonatomic) UILabel *messageLabel; // @synthesize messageLabel=_messageLabel;
@@ -54,7 +48,6 @@
 - (void)scrollViewDidScroll:(id)arg1;
 - (void)setAvatarImage:(id)arg1;
 - (void)setup;
-- (void)setupAcceptIgnoreButtons;
 - (void)setupAvatarView;
 - (void)setupAvatarViewForMomentsMatch;
 - (void)setupBackground;

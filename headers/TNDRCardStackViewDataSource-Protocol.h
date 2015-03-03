@@ -6,10 +6,10 @@
 
 #import "NSObject.h"
 
-@class TNDRCard, TNDRCardStackView;
+@class TNDRMomentBaseCard, TNDRMomentCardStackView;
 
 @protocol TNDRCardStackViewDataSource <NSObject>
-- (TNDRCard *)cardStackView:(TNDRCardStackView *)arg1 cardForIndex:(int)arg2;
-- (int)numberOfCardsOnStack:(TNDRCardStackView *)arg1;
+- (TNDRMomentBaseCard *)cardStackView:(TNDRMomentCardStackView *)arg1 cardForIndex:(int)arg2;
+- (int)numberOfCardsOnStack:(TNDRMomentCardStackView *)arg1;
 @end
 

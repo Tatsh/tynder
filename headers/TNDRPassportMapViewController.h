@@ -22,6 +22,7 @@
     BOOL _userPinDrop;
     BOOL _notZoomed;
     BOOL _movedMapWithAFingerOrANipple;
+    BOOL _mapRegionIsChanging;
     id <TNDRPassportPaywallDelegate> _paywallDelegate;
     id <TNDRPassportMapViewDelegate> _delegate;
     CLLocation *_activeLocation;
@@ -31,7 +32,7 @@
     TNDRPassportMapAnnotationLookup *_annotationLookup;
     UITapGestureRecognizer *_tapGestureRecognizer;
     UILongPressGestureRecognizer *_longPressGestureRecognizer;
-    CDUnknownBlockType _showMapAnnotationCompletionBlock;
+    CDUnknownBlockType _moveToAnnotateMapLocationCompletionBlock;
     MKAnnotationView *_selectedAnnotationView;
     NSTimer *_pinDropCalloutAnimTimer;
     int _calloutViewLoadingState;
@@ -69,12 +70,15 @@
 @property(retain, nonatomic) MKAnnotationView *lastSelectedAnnotationView; // @synthesize lastSelectedAnnotationView=_lastSelectedAnnotationView;
 @property(retain, nonatomic) UILongPressGestureRecognizer *longPressGestureRecognizer; // @synthesize longPressGestureRecognizer=_longPressGestureRecognizer;
 @property(retain, nonatomic) UIPanGestureRecognizer *mapMoveGestureRecognizer; // @synthesize mapMoveGestureRecognizer=_mapMoveGestureRecognizer;
+@property(nonatomic) BOOL mapRegionIsChanging; // @synthesize mapRegionIsChanging=_mapRegionIsChanging;
 @property(retain, nonatomic) TNDRPassportMapView *mapView; // @synthesize mapView=_mapView;
 - (void)mapView:(id)arg1 didAddAnnotationViews:(id)arg2;
 - (void)mapView:(id)arg1 didDeselectAnnotationView:(id)arg2;
 - (void)mapView:(id)arg1 didSelectAnnotationView:(id)arg2;
 - (void)mapView:(id)arg1 regionDidChangeAnimated:(BOOL)arg2;
+- (void)mapView:(id)arg1 regionWillChangeAnimated:(BOOL)arg2;
 - (id)mapView:(id)arg1 viewForAnnotation:(id)arg2;
+@property(copy, nonatomic) CDUnknownBlockType moveToAnnotateMapLocationCompletionBlock; // @synthesize moveToAnnotateMapLocationCompletionBlock=_moveToAnnotateMapLocationCompletionBlock;
 - (void)moveToAnnotatedMapLocation:(id)arg1;
 - (void)moveToAnnotatedMapLocation:(id)arg1 animated:(BOOL)arg2;
 - (void)moveToAnnotatedMapLocation:(id)arg1 animated:(BOOL)arg2 completion:(CDUnknownBlockType)arg3;
@@ -84,7 +88,6 @@
 - (void)pinTapped;
 @property(retain, nonatomic) MKPlacemark *placemarkSelectedFromSearch; // @synthesize placemarkSelectedFromSearch=_placemarkSelectedFromSearch;
 @property(retain, nonatomic) MKAnnotationView *selectedAnnotationView; // @synthesize selectedAnnotationView=_selectedAnnotationView;
-@property(copy, nonatomic) CDUnknownBlockType showMapAnnotationCompletionBlock; // @synthesize showMapAnnotationCompletionBlock=_showMapAnnotationCompletionBlock;
 @property(retain, nonatomic) NSDate *startDate; // @synthesize startDate=_startDate;
 @property(retain, nonatomic) UITapGestureRecognizer *tapGestureRecognizer; // @synthesize tapGestureRecognizer=_tapGestureRecognizer;
 - (void)setupAndDisplayAnnotation:(id)arg1 forAnnotationView:(id)arg2;

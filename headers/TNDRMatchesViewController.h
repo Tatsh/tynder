@@ -10,7 +10,6 @@
 #import "NSFetchedResultsControllerDelegate.h"
 #import "TNDR2ProfilePreviewDelegate.h"
 #import "TNDRChatViewControllerDelegate.h"
-#import "TNDRMatchCellDelegate.h"
 #import "TNDRMomentStackViewControllerDelegate.h"
 #import "TNDRNoMatchesViewDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
@@ -23,9 +22,9 @@
 #import "UITextFieldDelegate.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSFetchedResultsController, NSIndexPath, NSMutableArray, NSPredicate, NSString, NSTimer, TNDRAddFriendsViewController, TNDRChatToProfileTransitioningDelegate, TNDRList, TNDRMatch, TNDRMatchCell, TNDRMatchesToMomentsAnimationController, TNDRMiniStackContainerView, TNDRMiniStackView, TNDRMomentStackViewController, TNDRNoMatchesView, TNDRProfilePreviewViewController, TNDRPullToRefreshView, UIAlertView, UIButton, UIImage, UIImageView, UISearchBar, UITableView, UITapGestureRecognizer, UIToolbar, UIView;
+@class NSFetchedResultsController, NSIndexPath, NSMutableArray, NSPredicate, NSString, NSTimer, TNDRChatToProfileTransitioningDelegate, TNDRList, TNDRMatch, TNDRMatchCell, TNDRMatchesToMomentsAnimationController, TNDRMiniStackContainerView, TNDRMiniStackView, TNDRMomentStackViewController, TNDRNoMatchesView, TNDRProfilePreviewViewController, TNDRPullToRefreshView, UIAlertView, UIImage, UIImageView, UISearchBar, UITableView, UITapGestureRecognizer, UIToolbar, UIView;
 
-@interface TNDRMatchesViewController : UIViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, MSCMoreOptionTableViewCellDelegate, TNDR2ProfilePreviewDelegate, UIAlertViewDelegate, UITextFieldDelegate, TNDRNoMatchesViewDelegate, UIViewControllerTransitioningDelegate, TNDRMatchCellDelegate, TNDRMomentStackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TNDRChatViewControllerDelegate, TNDRURLNavigableProtocol>
+@interface TNDRMatchesViewController : UIViewController <NSFetchedResultsControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, MSCMoreOptionTableViewCellDelegate, TNDR2ProfilePreviewDelegate, UIAlertViewDelegate, UITextFieldDelegate, TNDRNoMatchesViewDelegate, UIViewControllerTransitioningDelegate, TNDRMomentStackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, TNDRChatViewControllerDelegate, TNDRURLNavigableProtocol>
 {
     UISearchBar *_searchBar;
     UIView *_searchOverlayView;
@@ -70,8 +69,6 @@
     NSFetchedResultsController *_momentsFetchedResultsController;
     TNDRMatchesToMomentsAnimationController *_matchesToMomentsAnimationController;
     TNDRMomentStackViewController *_momentStackViewController;
-    TNDRAddFriendsViewController *_addFriendsViewController;
-    UIButton *_addFriendsButton;
     TNDRMatchCell *_footerCell;
     UIView *_footerContainer;
     TNDRPullToRefreshView *_pullToRefreshView;
@@ -83,8 +80,6 @@
 
 + (id)viewControllerNavigationKey;
 - (void).cxx_destruct;
-@property(retain, nonatomic) UIButton *addFriendsButton; // @synthesize addFriendsButton=_addFriendsButton;
-@property(retain, nonatomic) TNDRAddFriendsViewController *addFriendsViewController; // @synthesize addFriendsViewController=_addFriendsViewController;
 - (void)addObservers;
 - (void)adjustFramesForSearching:(BOOL)arg1 animated:(BOOL)arg2;
 - (void)adjustSubviewsForNoMatches:(BOOL)arg1;
@@ -95,8 +90,6 @@
 - (id)animationControllerForPresentedController:(id)arg1 presentingController:(id)arg2 sourceController:(id)arg3;
 - (void)applicationDidEnterBackground:(id)arg1;
 - (void)applicationWillEnterForeground:(id)arg1;
-- (void)cellDidAcceptMatchRequest:(id)arg1;
-- (void)cellDidIgnoreMatchRequest:(id)arg1;
 - (void)configureCell:(id)arg1 atIndexPath:(id)arg2;
 - (void)controller:(id)arg1 didChangeObject:(id)arg2 atIndexPath:(id)arg3 forChangeType:(unsigned int)arg4 newIndexPath:(id)arg5;
 - (void)controller:(id)arg1 didChangeSection:(id)arg2 atIndex:(unsigned int)arg3 forChangeType:(unsigned int)arg4;
@@ -108,7 +101,6 @@
 - (void)didBlockUser;
 - (void)didTapChatCloseButton;
 - (void)didTapDiscoverButton;
-- (void)didTapMatchFriendsButton;
 - (void)didTapMomentStackViewControllerDoneButton;
 - (void)didTapProfileDoneButton;
 - (void)enableCancelButton:(id)arg1;
@@ -122,8 +114,6 @@
 - (struct CGRect)frameForTableView;
 - (void)handleDidAuthenticateNotification:(id)arg1;
 - (void)handleDidLogoutNotification:(id)arg1;
-- (void)handleFriendsEnabledChange:(id)arg1;
-- (void)handleGesture:(id)arg1;
 - (void)handleOverlayTap:(id)arg1;
 - (void)handleUpdateDoneNotification:(id)arg1;
 - (void)handleUserAuthenticatedNotification:(id)arg1;
@@ -198,22 +188,17 @@
 - (void)setupPullToRefreshView;
 - (void)setupSearchBar;
 - (void)setupSearchOverlay;
-- (void)setupTableFooterView;
 - (void)setupTableHeaderView;
 - (void)setupTableView;
-- (void)showAddFriendsController;
-- (void)showAddFriendsControllerFromButton:(id)arg1;
 - (void)showMiniStack;
 - (void)showSearchOverlayAnimated:(BOOL)arg1;
 - (id)sortDescriptors;
 - (BOOL)tableView:(id)arg1 canEditRowAtIndexPath:(id)arg2;
 - (id)tableView:(id)arg1 cellForRowAtIndexPath:(id)arg2;
-- (void)tableView:(id)arg1 commitEditingStyle:(int)arg2 forRowAtIndexPath:(id)arg3;
 - (void)tableView:(id)arg1 didDeselectRowAtIndexPath:(id)arg2;
 - (void)tableView:(id)arg1 didSelectRowAtIndexPath:(id)arg2;
 - (int)tableView:(id)arg1 editingStyleForRowAtIndexPath:(id)arg2;
 - (float)tableView:(id)arg1 heightForRowAtIndexPath:(id)arg2;
-- (void)tableView:(id)arg1 moreOptionButtonPressedInRowAtIndexPath:(id)arg2;
 - (int)tableView:(id)arg1 numberOfRowsInSection:(int)arg2;
 - (id)tableView:(id)arg1 titleForDeleteConfirmationButtonForRowAtIndexPath:(id)arg2;
 - (float)topOffsetIncludeMomentsHeader:(BOOL)arg1;
@@ -231,6 +216,7 @@
 - (void)wantsToFollow:(id)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

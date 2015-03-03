@@ -6,16 +6,17 @@
 
 #import "NSObject.h"
 
-@class NSData, NSDictionary;
+@class NSData, NSDictionary, NSString;
 
 @interface CLSAnalyticsMetadataController : NSObject
 {
     NSDictionary *_appInfoDictionary;
     NSDictionary *_metadata;
     NSData *_metadataJSONData;
+    NSString *_instanceIdentifier;
 }
 
-+ (id)metadataDictionaryFromContext:(CDStruct_a6175b54)arg1 appInfoDictionary:(id)arg2;
++ (id)metadataDictionaryFromContext:(CDStruct_a6175b54)arg1 appInfoDictionary:(id)arg2 instanceIdentifier:(id)arg3;
 + (void)setValueInDictionary:(id)arg1 withKey:(id)arg2 toBOOL:(BOOL)arg3;
 + (void)setValueInDictionary:(id)arg1 withKey:(id)arg2 toCString:(const char *)arg3;
 + (void)setValueInDictionary:(id)arg1 withKey:(id)arg2 toInteger:(int)arg3;
@@ -25,7 +26,8 @@
 @property(readonly, copy, nonatomic) NSDictionary *appInfoDictionary; // @synthesize appInfoDictionary=_appInfoDictionary;
 - (void)dealloc;
 - (id)init;
-- (id)initWithAppInfoDictionary:(id)arg1;
+- (id)initWithAppInfoDictionary:(id)arg1 instanceIdentifier:(id)arg2;
+@property(readonly, copy, nonatomic) NSString *instanceIdentifier; // @synthesize instanceIdentifier=_instanceIdentifier;
 @property(readonly, copy, nonatomic) NSDictionary *metadata; // @synthesize metadata=_metadata;
 @property(readonly, copy, nonatomic) NSData *metadataJSONData; // @synthesize metadataJSONData=_metadataJSONData;
 

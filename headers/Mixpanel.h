@@ -95,6 +95,7 @@
 - (id)collectAutomaticProperties;
 - (void)connectGestureRecognized:(id)arg1;
 - (void)connectToABTestDesigner;
+- (void)connectToABTestDesigner:(BOOL)arg1;
 - (void)createAlias:(id)arg1 forDistinctID:(id)arg2;
 - (id)currentRadio;
 - (id)currentSuperProperties;
@@ -126,6 +127,7 @@
 - (id)initWithToken:(id)arg1 andFlushInterval:(unsigned int)arg2;
 - (id)initWithToken:(id)arg1 launchOptions:(id)arg2 andFlushInterval:(unsigned int)arg3;
 - (void)joinExperiments;
+- (void)joinExperimentsWithCallback:(CDUnknownBlockType)arg1;
 - (id)libVersion;
 - (void)markNotificationShown:(id)arg1;
 - (void)markSurvey:(id)arg1 shown:(BOOL)arg2 withAnswerCount:(unsigned int)arg3;
@@ -161,8 +163,8 @@
 @property(retain, nonatomic) CTTelephonyNetworkInfo *telephonyInfo; // @synthesize telephonyInfo=_telephonyInfo;
 @property(retain, nonatomic) NSMutableDictionary *timedEvents; // @synthesize timedEvents=_timedEvents;
 @property(retain, nonatomic) NSTimer *timer; // @synthesize timer=_timer;
+- (void)setUpListeners;
 @property(retain, nonatomic) NSSet *variants; // @synthesize variants=_variants;
-- (void)setupListeners;
 - (BOOL)showMiniNotificationWithObject:(id)arg1;
 - (void)showNotification;
 - (void)showNotificationWithID:(unsigned int)arg1;

@@ -6,59 +6,51 @@
 
 #import "UIViewController.h"
 
-#import "NSFetchedResultsControllerDelegate.h"
-#import "TNDR2ProfilePreviewDelegate.h"
+#import "TNDRCardCellControlDependencies.h"
+#import "TNDRCardCellStackControl.h"
 #import "TNDRDialogViewControllerDelegate.h"
 #import "TNDRDiscoverOffViewDelegate.h"
 #import "TNDRPassportLocationsListViewControllerDelegate.h"
 #import "TNDRTinderPlusPaywallViewControllerDelegate.h"
 #import "TNDRURLNavigableProtocol.h"
-#import "UICollectionViewDataSource.h"
-#import "UICollectionViewDelegate.h"
 #import "UIGestureRecognizerDelegate.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSFetchedResultsController, NSMutableArray, NSString, NSTimer, NSURLSessionDataTask, TNDRDiscoverOffView, TNDREmptyStackLayout, TNDRGameToNewMatchAnimationController, TNDRGamepadBackgroundView, TNDRGamepadButton, TNDRLikeGamepadButton, TNDRNoRecommendationsView, TNDRPassportGamepadButton, TNDRPassportLocationsListAnimationController, TNDRPassportLocationsListViewController, TNDRPassportMapStackContainerViewController, TNDRProfilePreviewViewController, TNDRRateLimitRoadblockDialogViewController, TNDRRecommendationToProfileAnimationController, TNDRRewindGamepadButton, TNDRStackLayout, TNDRTinderPlusPaywallAnimationController, TNDRTinderPlusPaywallViewController, TNDRUser, UICollectionView, UIImageView, UILabel, UIPanGestureRecognizer, UITapGestureRecognizer, UIView;
+@class NSString, NSURLSessionDataTask, TNDRCardCellMediator, TNDRDiscoverOffView, TNDREmptyStackLayout, TNDRGameToNewMatchAnimationController, TNDRGamepadBackgroundView, TNDRGamepadButton, TNDRLikeGamepadButton, TNDRNoRecommendationsView, TNDRPassportGamepadButton, TNDRPassportLocationsListAnimationController, TNDRPassportLocationsListViewController, TNDRPassportMapStackContainerViewController, TNDRRateLimitRoadblockDialogViewController, TNDRRewindGamepadButton, TNDRStackLayout, TNDRTinderPlusPaywallAnimationController, TNDRTinderPlusPaywallViewController, TNDRUser, UICollectionView, UIImageView, UILabel, UIPanGestureRecognizer, UITapGestureRecognizer, UIView;
 
-@interface TNDRRecommendationViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, TNDR2ProfilePreviewDelegate, TNDRDiscoverOffViewDelegate, TNDRPassportLocationsListViewControllerDelegate, TNDRTinderPlusPaywallViewControllerDelegate, TNDRDialogViewControllerDelegate, TNDRURLNavigableProtocol>
+@interface TNDRRecommendationViewController : UIViewController <UIGestureRecognizerDelegate, UIViewControllerTransitioningDelegate, TNDRDiscoverOffViewDelegate, TNDRPassportLocationsListViewControllerDelegate, TNDRTinderPlusPaywallViewControllerDelegate, TNDRDialogViewControllerDelegate, TNDRCardCellControlDependencies, TNDRCardCellStackControl, TNDRURLNavigableProtocol>
 {
     BOOL _isCardFinalizing;
     BOOL _isDraggingCard;
     BOOL _preventOpeningProfile;
     struct CGPoint _panStartPoint;
     struct CGPoint _panCurPoint;
-    BOOL _shouldReloadForZIndexFix;
     TNDRUser *_lastTrackedUser;
     BOOL _userInteractionEnabled;
-    BOOL _rewindLiked;
     BOOL _openingUserProfile;
-    BOOL _didStartRecs;
-    BOOL _preventTrackRecsStartEnd;
     BOOL _isShowingRateLimitDeviceTimeError;
+    BOOL _recsSessionIsActive;
+    BOOL _rebuildingCardStack;
     TNDRLikeGamepadButton *_likeButton;
     TNDRGamepadButton *_passButton;
     TNDRRewindGamepadButton *_rewindButton;
     TNDRPassportGamepadButton *_passportButton;
     TNDRGamepadButton *_infoButton;
     TNDRGamepadBackgroundView *_buttonContainer;
-    NSFetchedResultsController *_fetchedResultsController;
-    NSMutableArray *_fetchedObjectChanges;
     TNDRStackLayout *_stackLayout;
     TNDREmptyStackLayout *_emptyStackLayout;
     UICollectionView *_collectionView;
+    TNDRCardCellMediator *_mediator;
     UIPanGestureRecognizer *_panGestureRecognizer;
     UITapGestureRecognizer *_tapGestureRecognizer;
-    UIView *_currentCardSnapshot;
+    UIView *_animatableCardContentView;
     UIImageView *_cardSnapshotShadow;
     TNDRNoRecommendationsView *_noRecommendationsView;
     TNDRDiscoverOffView *_discoverOffView;
-    UIView *_snapshotContainerView;
+    UIView *_animatableCardContainerView;
     UILabel *_likeStampView;
     UILabel *_passStampView;
-    TNDRRecommendationToProfileAnimationController *_gameToProfileTransitioning;
     TNDRGameToNewMatchAnimationController *_gameToNewMatchTransitioning;
-    NSTimer *_trackSparksRecsStartTimer;
-    TNDRProfilePreviewViewController *_recProfilePreviewViewController;
     TNDRTinderPlusPaywallViewController *_paywallViewController;
     TNDRTinderPlusPaywallAnimationController *_paywallAnimationController;
     TNDRRateLimitRoadblockDialogViewController *_rateLimitRoadblockDialogViewController;
@@ -71,55 +63,54 @@
 
 + (id)viewControllerNavigationKey;
 - (void).cxx_destruct;
-- (void)addFriendsTapped:(id)arg1;
 - (void)adjustCardAtIndex:(int)arg1 horizontalTranslation:(float)arg2;
 - (void)adjustCardsForPanningPosition:(float)arg1;
-- (void)animateCardForDirection:(int)arg1;
+@property(retain, nonatomic) UIView *animatableCardContainerView; // @synthesize animatableCardContainerView=_animatableCardContainerView;
+@property(retain, nonatomic) UIView *animatableCardContentView; // @synthesize animatableCardContentView=_animatableCardContentView;
+- (void)animateCell:(id)arg1 direction:(int)arg2;
+- (void)animateCellToCenter:(id)arg1;
 - (void)animateInGameButtons;
+- (void)animateUnswipedCellOffscreen:(id)arg1 direction:(int)arg2 showStamp:(BOOL)arg3;
 - (id)animationControllerForDismissedController:(id)arg1;
 - (id)animationControllerForPresentedController:(id)arg1 presentingController:(id)arg2 sourceController:(id)arg3;
 @property(retain, nonatomic) TNDRGamepadBackgroundView *buttonContainer; // @synthesize buttonContainer=_buttonContainer;
 @property(retain, nonatomic) UIImageView *cardSnapshotShadow; // @synthesize cardSnapshotShadow=_cardSnapshotShadow;
+- (void)cardStackDidFinishRebuilding;
+- (void)cardStackWillBeCleared;
 - (id)cellForIndexOnStack:(unsigned int)arg1;
 - (id)cellForTopCardOnStack;
 - (void)changeButtonContainerForUpdatedGameType;
 - (void)checkForGameButtonTypeChangesAndTransitionIfNecessary;
 @property(retain, nonatomic) UICollectionView *collectionView; // @synthesize collectionView=_collectionView;
-- (id)collectionView:(id)arg1 cellForItemAtIndexPath:(id)arg2;
-- (int)collectionView:(id)arg1 numberOfItemsInSection:(int)arg2;
-- (void)controller:(id)arg1 didChangeObject:(id)arg2 atIndexPath:(id)arg3 forChangeType:(unsigned int)arg4 newIndexPath:(id)arg5;
-- (void)controllerDidChangeContent:(id)arg1;
-- (void)createAndShowSnapshotForCard:(id)arg1;
-@property(retain, nonatomic) UIView *currentCardSnapshot; // @synthesize currentCardSnapshot=_currentCardSnapshot;
+- (void)createAndShowAnimatableCardViewForCell:(id)arg1;
 @property(retain, nonatomic) NSURLSessionDataTask *currentPassportTask; // @synthesize currentPassportTask=_currentPassportTask;
 - (void)dealloc;
-- (void)dialogRequestsDismissal;
+- (BOOL)destinationViewControllerShouldTriggerRecsSessionEnd:(id)arg1;
+- (void)dialogViewControllerRequestsDismissal:(id)arg1;
 - (void)didCompletePurchase;
 - (void)didReceiveMemoryWarning;
 - (void)didSelectToCloseLocationListWithoutTraveling;
 - (void)didSelectToNavigateToPassportPaywall:(unsigned int)arg1;
 - (void)didSelectToOpenMapSearchController;
 - (void)didSelectTravelToLocation:(id)arg1;
-@property(nonatomic) BOOL didStartRecs; // @synthesize didStartRecs=_didStartRecs;
-- (void)didTapProfileDoneButton;
-- (void)didTapProfileLikeButton;
-- (void)didTapProfilePassButton;
 - (void)discoverButtonTapped;
 @property(retain) TNDRDiscoverOffView *discoverOffView; // @synthesize discoverOffView=_discoverOffView;
+- (void)dismissCardCellWithSwipeLeft:(id)arg1 showStamp:(BOOL)arg2;
+- (void)dismissCardCellWithSwipeRight:(id)arg1 showStamp:(BOOL)arg2;
+- (void)dismissCell:(id)arg1 direction:(int)arg2 showStamp:(BOOL)arg3;
 @property(retain, nonatomic) TNDREmptyStackLayout *emptyStackLayout; // @synthesize emptyStackLayout=_emptyStackLayout;
-- (void)fakeLikeUserForRateLimiting:(id)arg1;
-@property(retain, nonatomic) NSMutableArray *fetchedObjectChanges; // @synthesize fetchedObjectChanges=_fetchedObjectChanges;
-@property(retain, nonatomic) NSFetchedResultsController *fetchedResultsController; // @synthesize fetchedResultsController=_fetchedResultsController;
 - (void)finishSwipingInDirection:(int)arg1 withVelocity:(struct CGPoint)arg2;
 - (id)gamePanGestureRecognizer;
 @property(retain, nonatomic) TNDRGameToNewMatchAnimationController *gameToNewMatchTransitioning; // @synthesize gameToNewMatchTransitioning=_gameToNewMatchTransitioning;
-@property(retain, nonatomic) TNDRRecommendationToProfileAnimationController *gameToProfileTransitioning; // @synthesize gameToProfileTransitioning=_gameToProfileTransitioning;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;
 - (void)handleAppBackgroundedNotification:(id)arg1;
+- (void)handleAppForegroundedNotification:(id)arg1;
+- (void)handleMediatorDidChangeCellsNotification:(id)arg1;
 - (void)handleNoRecommendationsNotification:(id)arg1;
 - (void)handlePanGesture:(id)arg1;
 - (void)handlePaywallDownloadedProducts:(id)arg1;
-- (void)handleRecommendationsUpdatedNotification:(id)arg1;
+- (void)handleRecsSessionEndingFromViewDisappearing;
+- (void)handleRecsSessionStartingFromViewAppearing;
 - (void)handleRewindDidBecomeAvailableNotification:(id)arg1;
 - (void)handleRewindDidBecomeUnavailableNotification:(id)arg1;
 - (void)handleStatusBarChangedNotification:(id)arg1;
@@ -128,28 +119,33 @@
 - (void)handleTinderPlusInactiveNotification:(id)arg1;
 - (void)handleTrackRecsStartAfterIntro:(id)arg1;
 - (void)handleUserAuthenticated:(id)arg1;
-- (void)handleUserDidLogoutNotification:(id)arg1;
 - (void)highlightActionIndicators:(float)arg1;
 @property(retain, nonatomic) TNDRGamepadButton *infoButton; // @synthesize infoButton=_infoButton;
 - (void)infoButtonTapped:(id)arg1;
 - (id)init;
+@property(nonatomic, getter=isRebuildingCardStack) BOOL rebuildingCardStack; // @synthesize rebuildingCardStack=_rebuildingCardStack;
 @property(nonatomic) BOOL isShowingRateLimitDeviceTimeError; // @synthesize isShowingRateLimitDeviceTimeError=_isShowingRateLimitDeviceTimeError;
 @property(retain, nonatomic) TNDRLikeGamepadButton *likeButton; // @synthesize likeButton=_likeButton;
+- (void)likeButtonTapped:(id)arg1;
+- (id)likeStamp;
 @property(retain, nonatomic) UILabel *likeStampView; // @synthesize likeStampView=_likeStampView;
-- (void)likeSwiped; // Swipes and moves to next
-- (void)likeTapped:(id)arg1;
-- (void)likeUserForTopCard;
+@property(retain, nonatomic) TNDRCardCellMediator *mediator; // @synthesize mediator=_mediator;
 @property(retain, nonatomic) TNDRPassportLocationsListAnimationController *myLocationsAnimationController; // @synthesize myLocationsAnimationController=_myLocationsAnimationController;
 @property(retain) TNDRNoRecommendationsView *noRecommendationsView; // @synthesize noRecommendationsView=_noRecommendationsView;
-- (unsigned int)numberOfRecommendationsInSection:(int)arg1;
-- (int)numberOfSectionsInCollectionView:(id)arg1;
+- (void)notifyInteractionHandlerOfSwipeLeft;
+- (void)notifyInteractionHandlerOfSwipeRight;
+- (void)notifyInteractionHandlerOfTapLeft;
+- (void)notifyInteractionHandlerOfTapLeftAccessory;
+- (void)notifyInteractionHandlerOfTapRight;
+- (void)notifyInteractionHandlerOfTappedCard;
+- (void)notifyInteractionHandlerOfTappedInfoButton;
+- (int)numberOfCardsInStack;
 @property(nonatomic) BOOL openingUserProfile; // @synthesize openingUserProfile=_openingUserProfile;
 @property(retain, nonatomic) UIPanGestureRecognizer *panGestureRecognizer; // @synthesize panGestureRecognizer=_panGestureRecognizer;
 @property(retain, nonatomic) TNDRGamepadButton *passButton; // @synthesize passButton=_passButton;
+- (void)passButtonTapped:(id)arg1;
+- (id)passStamp;
 @property(retain, nonatomic) UILabel *passStampView; // @synthesize passStampView=_passStampView;
-- (void)passSwiped;
-- (void)passTapped:(id)arg1;
-- (void)passUserForTopCard;
 @property(retain, nonatomic) TNDRPassportGamepadButton *passportButton; // @synthesize passportButton=_passportButton;
 - (void)passportButtonTapped:(id)arg1;
 @property(retain, nonatomic) TNDRPassportLocationsListViewController *passportLocationsListController; // @synthesize passportLocationsListController=_passportLocationsListController;
@@ -159,55 +155,45 @@
 - (void)paywallRequestsDismissal;
 @property(retain, nonatomic) TNDRTinderPlusPaywallViewController *paywallViewController; // @synthesize paywallViewController=_paywallViewController;
 - (void)performRewindAction;
-- (void)presentNewMatch:(id)arg1;
-@property(nonatomic) BOOL preventTrackRecsStartEnd; // @synthesize preventTrackRecsStartEnd=_preventTrackRecsStartEnd;
+- (void)postDidDismissCellNotificationForDirection:(int)arg1;
 @property(retain, nonatomic) TNDRRateLimitRoadblockDialogViewController *rateLimitRoadblockDialogViewController; // @synthesize rateLimitRoadblockDialogViewController=_rateLimitRoadblockDialogViewController;
-@property(retain, nonatomic) TNDRProfilePreviewViewController *recProfilePreviewViewController; // @synthesize recProfilePreviewViewController=_recProfilePreviewViewController;
+@property(nonatomic) BOOL recsSessionIsActive; // @synthesize recsSessionIsActive=_recsSessionIsActive;
 - (void)registerNotifications;
-- (void)reloadCellsToEnsureAllZIndicesAreLegit;
 - (void)removeDiscoverOffView;
 - (void)removeNoRecommendationsView;
-- (void)requestRecommendationsIfNecessary;
-- (void)restoreViewToCenter:(id)arg1;
+- (void)resetAnimatableContentViewForCell:(id)arg1;
+- (void)returnCardCellToCenter:(id)arg1;
 - (void)returnRecommendationToCenterForRateLimiting:(id)arg1;
 @property(retain, nonatomic) TNDRRewindGamepadButton *rewindButton; // @synthesize rewindButton=_rewindButton;
 - (void)rewindButtonTapped:(id)arg1;
-@property(nonatomic) BOOL rewindLiked; // @synthesize rewindLiked=_rewindLiked;
-@property(retain, nonatomic) UIView *snapshotContainerView; // @synthesize snapshotContainerView=_snapshotContainerView;
 @property(retain, nonatomic) TNDRStackLayout *stackLayout; // @synthesize stackLayout=_stackLayout;
 @property(retain, nonatomic) UITapGestureRecognizer *tapGestureRecognizer; // @synthesize tapGestureRecognizer=_tapGestureRecognizer;
-@property(retain, nonatomic) NSTimer *trackSparksRecsStartTimer; // @synthesize trackSparksRecsStartTimer=_trackSparksRecsStartTimer;
 @property(nonatomic) BOOL userInteractionEnabled; // @synthesize userInteractionEnabled=_userInteractionEnabled;
 - (void)setup;
+- (void)setupAccessibilityLabels;
+- (void)setupAnimatableCardContainerView;
 - (void)setupButtons;
-- (void)setupDataSource;
 - (void)setupGameCardFrames;
 - (void)setupGestureRecognizer;
 - (void)setupPaywallViewController;
 - (void)setupRateLimitRoadblockViewControllerWithUserID:(id)arg1;
-- (void)setupSnapshotContainer;
-- (void)showAlertForFirstSwipeInDirection:(int)arg1 completion:(CDUnknownBlockType)arg2;
 - (void)showDiscoverOffiew;
 - (void)showNoRecommendationsView;
-- (void)showProfileForTopCard;
 - (void)showTinderPlusPaywallFrom:(unsigned int)arg1;
-- (void)takeRecProfileNavbarSnapshot;
+- (id)stackControlDelegate;
+- (id)stackViewController;
 - (void)topCardTapped:(id)arg1;
-- (void)trackSparksRecsEnd;
-- (void)trackSparksRecsStart;
-- (void)trackSwipeOnUser:(id)arg1 direction:(int)arg2;
 - (void)transitionTo:(id)arg1 optionsDict:(id)arg2 animated:(BOOL)arg3 completion:(CDUnknownBlockType)arg4;
-- (void)translateViewOffscreen:(id)arg1 withVelocity:(struct CGPoint)arg2 direction:(int)arg3;
-- (void)updateDiscoverEnabled;
-- (id)userForTopCardOnStack;
+- (void)translateSwipedCellOffscreen:(id)arg1 direction:(int)arg2;
+- (void)updateDiscoverEnabledWithCompletionHandler:(CDUnknownBlockType)arg1;
 - (void)viewDidAppear:(BOOL)arg1;
 - (void)viewDidDisappear:(BOOL)arg1;
 - (void)viewDidLayoutSubviews;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)arg1;
-- (void)viewWillDisappear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

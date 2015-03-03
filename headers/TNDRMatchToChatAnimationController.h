@@ -11,7 +11,7 @@
 #import "UIViewControllerAnimatedTransitioning.h"
 #import "UIViewControllerInteractiveTransitioning.h"
 
-@class NSString, NSTimer, TNDRCardStackView, UIPanGestureRecognizer, UIView, UIViewController;
+@class NSString, NSTimer, TNDRMomentCardStackView, UIPanGestureRecognizer, UIView, UIViewController;
 
 @interface TNDRMatchToChatAnimationController : NSObject <UIViewControllerInteractiveTransitioning, UIViewControllerAnimatedTransitioning, TNDRChatViewControllerReadyDelegate, UIGestureRecognizerDelegate>
 {
@@ -27,7 +27,7 @@
     UIView *_viewForInteraction;
     UIViewController *_matchesViewController;
     UIView *_matchesViewSnapshot;
-    TNDRCardStackView *_cardStackView;
+    TNDRMomentCardStackView *_cardStackView;
     UIView *_cardImageView;
     UIView *_cardSnapshot;
     NSTimer *_prepareTimer;
@@ -41,7 +41,7 @@
 - (void)animateTransition:(id)arg1;
 @property(retain, nonatomic) UIView *cardImageView; // @synthesize cardImageView=_cardImageView;
 @property(retain, nonatomic) UIView *cardSnapshot; // @synthesize cardSnapshot=_cardSnapshot;
-@property(retain, nonatomic) TNDRCardStackView *cardStackView; // @synthesize cardStackView=_cardStackView;
+@property(retain, nonatomic) TNDRMomentCardStackView *cardStackView; // @synthesize cardStackView=_cardStackView;
 - (void)chatReadyToPresent;
 - (BOOL)gestureRecognizer:(id)arg1 shouldRecognizeSimultaneouslyWithGestureRecognizer:(id)arg2;
 - (BOOL)gestureRecognizerShouldBegin:(id)arg1;

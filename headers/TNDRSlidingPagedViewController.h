@@ -14,7 +14,7 @@
 #import "UIScrollViewDelegate.h"
 #import "UIViewControllerTransitioningDelegate.h"
 
-@class NSArray, NSDate, NSString, TNDRChatTitleButton, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMatchesToMomentsCameraTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRMatchesViewController, TNDRMenuViewController, TNDRMomentsActivityViewController, TNDRMomentsCameraButton, TNDRMomentsCameraViewController, TNDRMomentsFooterView, TNDRMomentsTitleButton, TNDRRecommendationViewController, TNDRShareMomentWindow, TNDRSupportContacter, UIButton, UIView;
+@class NSArray, NSDate, NSString, NSTimer, TNDRChatTitleButton, TNDRChatViewController, TNDRMatchToChatAnimationController, TNDRMatchesToMomentsCameraTransitioningDelegate<UIViewControllerTransitioningDelegate>, TNDRMatchesViewController, TNDRMenuViewController, TNDRMomentsActivityViewController, TNDRMomentsCameraButton, TNDRMomentsCameraViewController, TNDRMomentsFooterView, TNDRMomentsTitleButton, TNDRRecommendationViewController, TNDRShareMomentWindow, TNDRSnowEmitterView, TNDRSupportContacter, UIButton, UIView;
 
 @interface TNDRSlidingPagedViewController : TNDRBaseSlidingPagedController <TNDRSettingsViewControllerDelegate, TNDRMatchesSearchDelegate, TNDRChatViewControllerDelegate, TNDRNotificationWindowDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate, TNDRURLNavigableProtocol>
 {
@@ -40,6 +40,8 @@
     NSArray *_viewControllerKeys;
     TNDRChatViewController *_chatViewController;
     NSDate *_startPulseTime;
+    NSTimer *_snowFallTimer;
+    TNDRSnowEmitterView *_viewSnow;
 }
 
 + (id)viewControllerNavigationKey;
@@ -66,7 +68,6 @@
 - (void)handleAppDidEnterBackground:(id)arg1;
 - (void)handleAppWillEnterForeground:(id)arg1;
 - (void)handleChatBadgeNotification:(id)arg1;
-- (void)handleFriendsEnabledChange:(id)arg1;
 - (void)handleHideMomentsFooter:(id)arg1;
 - (void)handleMomentViewerDismissedNotification:(id)arg1;
 - (void)handleMomentViewerShareNotification:(id)arg1;
@@ -104,6 +105,7 @@
 @property(retain, nonatomic) TNDRMomentsCameraViewController *momentsCameraViewController; // @synthesize momentsCameraViewController=_momentsCameraViewController;
 @property(retain, nonatomic) TNDRMomentsFooterView *momentsFooter; // @synthesize momentsFooter=_momentsFooter;
 @property(retain, nonatomic) TNDRMomentsTitleButton *momentsHeaderItem; // @synthesize momentsHeaderItem=_momentsHeaderItem;
+- (void)motionEnded:(int)arg1 withEvent:(id)arg2;
 - (void)performFinalSharingAnimation:(int)arg1;
 - (void)performSharingAnimationToTarget:(struct CGRect)arg1;
 - (void)preloadCameraMoments;
@@ -116,13 +118,16 @@
 - (void)registerNotifications;
 - (void)removePulseAnimationAfterWholePulse;
 - (void)scrollViewDidScroll:(id)arg1;
+@property(retain, nonatomic) NSTimer *snowFallTimer; // @synthesize snowFallTimer=_snowFallTimer;
 @property(retain, nonatomic) NSDate *startPulseTime; // @synthesize startPulseTime=_startPulseTime;
 @property(retain, nonatomic) NSArray *viewControllerKeys; // @synthesize viewControllerKeys=_viewControllerKeys;
+@property(retain, nonatomic) TNDRSnowEmitterView *viewSnow; // @synthesize viewSnow=_viewSnow;
 - (id)setupAnimationWindowForShareWithImage:(id)arg1;
 - (void)setupMomentsFooter;
-- (void)showAddFriendsControllerFromViewController:(id)arg1;
+- (void)setupSnow;
 - (void)showStatusBarIfPossible;
 - (void)shrinkMomentsCameraButtonForTesting;
+- (void)stopSnowTimer:(id)arg1;
 - (struct CGRect)targetRectOfMomentShareAnimation;
 - (void)transitionTo:(id)arg1 optionsDict:(id)arg2 animated:(BOOL)arg3 completion:(CDUnknownBlockType)arg4;
 - (void)transitionToCameraMomentsCompletion:(CDUnknownBlockType)arg1;
@@ -131,6 +136,7 @@
 - (void)viewWillAppear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

@@ -13,7 +13,10 @@
 + (id)tinderDeleteAccountTextColor;
 + (id)tinderDialogHeaderDetailTextColor;
 + (id)tinderDialogHeaderTitleTextColor;
++ (id)tinderDialogTableCellDisabledColor;
++ (id)tinderDialogTableCellSeparatorColor;
 + (id)tinderDialogTableCellTextColor;
++ (id)tinderDialogTableCellUnselectedTextColor;
 + (id)tinderGameButtonBackgroundColor;
 + (id)tinderGameButtonDisabledColor;
 + (id)tinderGameInfoButtonBackgroundColor;

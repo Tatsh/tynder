@@ -32,7 +32,6 @@
 - (void).cxx_destruct;
 - (void)adjustAgeSliderCellValuesForCurrentUser:(id)arg1;
 @property(retain, nonatomic) TNDRSliderCell *ageSliderCell; // @synthesize ageSliderCell=_ageSliderCell;
-- (void)clearRecsWithImmediateRefresh:(BOOL)arg1;
 - (void)configureDistanceSliderCellForMetricMeasurement:(id)arg1;
 - (void)configureDistanceSliderCellForStandardMeasurement:(id)arg1;
 - (void)configureForCurrentUser;
@@ -65,6 +64,7 @@
 - (void)viewWillDisappear:(BOOL)arg1;
 
 // Remaining properties
+@property(readonly, nonatomic) id <UIViewControllerAnimatedTransitioning> animationController;
 @property(readonly, copy) NSString *debugDescription;
 @property(readonly, copy) NSString *description;
 @property(readonly) unsigned int hash;

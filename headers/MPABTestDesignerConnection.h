@@ -14,6 +14,7 @@
 {
     BOOL _open;
     BOOL _connected;
+    BOOL _keepTrying;
     NSURL *_url;
     NSMutableDictionary *_session;
     NSDictionary *_typeToMessageClassMap;
@@ -32,9 +33,9 @@
 - (id)designerMessageForMessage:(id)arg1;
 - (void)hideConnectedView;
 - (id)initWithURL:(id)arg1;
-- (id)initWithURL:(id)arg1 connectCallback:(CDUnknownBlockType)arg2 disconnectCallback:(CDUnknownBlockType)arg3;
+- (id)initWithURL:(id)arg1 keepTrying:(BOOL)arg2 connectCallback:(CDUnknownBlockType)arg3 disconnectCallback:(CDUnknownBlockType)arg4;
 - (void)open;
-- (void)reconnect:(BOOL)arg1;
+- (void)reconnect:(BOOL)arg1 maxInterval:(int)arg2 maxRetries:(int)arg3;
 - (void)sendMessage:(id)arg1;
 @property(nonatomic) BOOL sessionEnded; // @synthesize sessionEnded=_sessionEnded;
 - (id)sessionObjectForKey:(id)arg1;

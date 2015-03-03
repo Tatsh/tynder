@@ -13,24 +13,19 @@
     NSString *_noMatchesTitle;
     NSString *_noMatchesDescription;
     NSString *_discoverButtonTitle;
-    NSString *_matchFriendsButtonTitle;
     id <TNDRNoMatchesViewDelegate> _delegate;
     UILabel *_noMatchesTitleLabel;
     UILabel *_noMatchesDescriptionLabel;
     UIImageView *_noMatchesOutlines;
     UIImageView *_noMatchesFade;
     UIButton *_discoverButton;
-    UIButton *_addFriendsButton;
 }
 
 - (void).cxx_destruct;
-@property(retain, nonatomic) UIButton *addFriendsButton; // @synthesize addFriendsButton=_addFriendsButton;
 @property(nonatomic) __weak id <TNDRNoMatchesViewDelegate> delegate; // @synthesize delegate=_delegate;
 - (void)didTapDiscoverButton:(id)arg1;
-- (void)didTapMatchFriendsButton:(id)arg1;
 @property(retain, nonatomic) UIButton *discoverButton; // @synthesize discoverButton=_discoverButton;
 - (id)initWithFrame:(struct CGRect)arg1;
-- (void)layoutSubviews;
 @property(retain, nonatomic) UILabel *noMatchesDescriptionLabel; // @synthesize noMatchesDescriptionLabel=_noMatchesDescriptionLabel;
 @property(retain, nonatomic) UIImageView *noMatchesFade; // @synthesize noMatchesFade=_noMatchesFade;
 @property(retain, nonatomic) UIImageView *noMatchesOutlines; // @synthesize noMatchesOutlines=_noMatchesOutlines;

@@ -86,6 +86,8 @@
 - (id)inputDigitHelper_:(id)arg1;
 - (id)inputDigitWithOptionToRememberPosition_:(id)arg1 rememberPosition:(BOOL)arg2;
 @property(nonatomic) BOOL inputHasFormatting_; // @synthesize inputHasFormatting_=_inputHasFormatting_;
+- (id)inputString:(id)arg1;
+- (id)inputStringAndRememberPosition:(id)arg1;
 @property(nonatomic) BOOL isCompleteNumber_; // @synthesize isCompleteNumber_=_isCompleteNumber_;
 - (BOOL)isDigitOrLeadingPlusSign_:(id)arg1;
 @property(nonatomic) BOOL isExpectingCountryCallingCode_; // @synthesize isExpectingCountryCallingCode_=_isExpectingCountryCallingCode_;

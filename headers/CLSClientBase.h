@@ -17,6 +17,7 @@
 
 + (char *)newHashedKeyWithSeed:(id)arg1 salt:(id)arg2;
 @property(readonly, nonatomic) NSString *APIKey;
+- (id)alternateExecutableSlices;
 @property(readonly, copy, nonatomic) NSString *applicationName;
 - (id)builtSDKVersion;
 @property(readonly, nonatomic) NSString *bundleId;
