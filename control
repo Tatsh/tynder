@@ -1,0 +1,9 @@
+Package: sh.tat.tndrauto
+Name: Tynder
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Likes new Tinder cards as they come (approximately every 2 seconds). Compatible with Ember!
+Maintainer: Tatsh
+Author: Tatsh
+Section: Tweaks
